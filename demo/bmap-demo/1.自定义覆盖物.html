@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta charset="utf-8">
+    <script src="../../jquery-3.1.1.js"></script>
+    <!--<script src="../../echarts.js"></script>-->
+    <!--<script src="../../bmap.js"></script>-->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=nTsNCxWYUDe9RK7aiNlzneDe42NKG1Sq"></script>
+</head>
+<body style="height: 100%; margin: 0">
+
+<h1>echarts--scatter 世界地图</h1>
+<div id="container" style="width: 1200px;height: 600px"></div>
+
+<script type="text/javascript">
+    //百度地图API功能
+    var map = new BMap.Map("container");
+    var point = new BMap.Point(116.404, 39.915);
+    map.centerAndZoom(point, 15);       //指定地图初始中心点和缩放比例
+
+    //创建一个自定义标志点
+    var pt = new BMap.Point(116.417, 39.909);
+    var myIcon = new BMap.Icon("../warning.gif", new BMap.Size(20, 20));      //(url, (图片剪裁尺寸) )原图尺寸250*250
+
+    myIcon.imageSize = {width: 20, height: 20};         //修改图片尺寸到与剪裁尺寸一致，防止出现图片占位空间大，实际尺寸小的问题
+    var marker = new BMap.Marker(pt, {icon: myIcon});  // 创建标注
+    map.addOverlay(marker);              // 将标注添加到地图中
+
+    var label = new BMap.Label("文字标注",{offset:new BMap.Size(20,-10)});
+    marker.setLabel(label);
+
+</script>
+</body>
+</html>
