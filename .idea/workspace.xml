@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9ba7fcee-f740-4d6e-9e69-f57e6ea25422" name="默认" comment="" />
+    <list default="true" id="9ba7fcee-f740-4d6e-9e69-f57e6ea25422" name="默认" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="echartJS.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,13 +42,29 @@
       <file leaf-file-name="5.点聚合.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/demo/bmap-demo/5.点聚合.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="489" column="0" lean-forward="true" selection-start-line="489" selection-start-column="0" selection-end-line="489" selection-end-column="0" />
+            <state relative-caret-position="352">
+              <caret line="505" column="9" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="505" selection-end-column="9" />
               <folding>
+                <element signature="n#script#0;n#body#0;n#html#0;n#!!top" expanded="false" />
                 <element signature="e#1651#10080#0" expanded="false" />
                 <element signature="e#10104#16134#0" expanded="false" />
                 <element signature="e#18002#18304#0" expanded="false" />
                 <marker date="1492588900557" expanded="true" signature="17193:17200" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="6.行政区边界绘制.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/demo/bmap-demo/6.行政区边界绘制.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1492">
+              <caret line="9" column="119" lean-forward="false" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="119" />
+              <folding>
+                <element signature="e#1651#10080#0" expanded="false" />
+                <element signature="e#10104#16134#0" expanded="false" />
+                <element signature="e#18002#18304#0" expanded="false" />
+                <marker date="1492592264102" expanded="true" signature="17193:17200" ph="..." />
               </folding>
             </state>
           </provider>
@@ -117,6 +135,9 @@
       <replace>warning</replace>
     </replaceStrings>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -143,6 +164,7 @@
         <option value="$PROJECT_DIR$/demo/bmp-echarts/2-bmap-scatter.html" />
         <option value="$PROJECT_DIR$/demo/bmap-demo/4.点-分类标记.html" />
         <option value="$PROJECT_DIR$/demo/bmap-demo/5.点聚合.html" />
+        <option value="$PROJECT_DIR$/demo/bmap-demo/6.行政区边界绘制.html" />
       </list>
     </option>
   </component>
@@ -153,10 +175,13 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="433" />
-    <option name="y" value="41" />
+    <option name="x" value="-58" />
+    <option name="y" value="13" />
     <option name="width" value="1522" />
     <option name="height" value="1015" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="添加" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -360,20 +385,21 @@
       <workItem from="1492388714876" duration="225000" />
       <workItem from="1492389207949" duration="30911000" />
       <workItem from="1492475155055" duration="27181000" />
-      <workItem from="1492561972770" duration="22096000" />
+      <workItem from="1492561972770" duration="24288000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="108701000" />
+    <option name="totallyTimeSpent" value="110893000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="433" y="41" width="1522" height="1015" extended-state="0" />
+    <frame x="-58" y="13" width="1522" height="1015" extended-state="1" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15337838" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15337838" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -743,7 +769,7 @@
         <state relative-caret-position="528">
           <caret line="24" column="72" lean-forward="false" selection-start-line="24" selection-start-column="72" selection-end-line="24" selection-end-column="72" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -799,11 +825,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/demo/bmap-demo/6.行政区边界绘制.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1492">
+          <caret line="9" column="119" lean-forward="false" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="119" />
+          <folding>
+            <element signature="e#1651#10080#0" expanded="false" />
+            <element signature="e#10104#16134#0" expanded="false" />
+            <element signature="e#18002#18304#0" expanded="false" />
+            <marker date="1492592264102" expanded="true" signature="17193:17200" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/demo/bmap-demo/5.点聚合.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="489" column="0" lean-forward="true" selection-start-line="489" selection-start-column="0" selection-end-line="489" selection-end-column="0" />
+        <state relative-caret-position="352">
+          <caret line="505" column="9" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="505" selection-end-column="9" />
           <folding>
+            <element signature="n#script#0;n#body#0;n#html#0;n#!!top" expanded="false" />
             <element signature="e#1651#10080#0" expanded="false" />
             <element signature="e#10104#16134#0" expanded="false" />
             <element signature="e#18002#18304#0" expanded="false" />
