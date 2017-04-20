@@ -509,16 +509,16 @@
         bdary.get(name, function (rs) {
             map.clearOverlays();
             var counts = rs.boundaries.length;
-            if (counts === 0){
+            if (counts === 0) {
                 alert("未能获取当前输入的行政区");
-                return ;
+                return;
             }
 
             var pointArray = [];
-            for (var i=0;i<counts;i++){
-                var ply = new BMap.Polygon(rs.boundaries[i],{
-                    strokeWeight:2,
-                    strokeColor:"#ff0000"
+            for (var i = 0; i < counts; i++) {
+                var ply = new BMap.Polygon(rs.boundaries[i], {
+                    strokeWeight: 2,
+                    strokeColor: "#ff0000"
                 });
                 map.addOverlay(ply);
                 map.setViewport(pointArray);
@@ -526,8 +526,34 @@
         })
     }
 
-    setTimeout(getBoundary("湖北"),2000);
+    setTimeout(getBoundary("湖北"), 2000);
 
+    //添加自定义事件
+    /*function addZoomHandler() {
+        map.addEventListener("",function (e) {
+            BaiduMap.setOnMapStatusChangeListener
+        });
+    }*/
+
+    /*map.addEventListener('zoomend',function (e) {
+     console.log(map.getZoom());
+     for (var attr in e){
+     console.dir(e[attr]);
+     console.dir(attr + ": " + e[attr]);
+     }
+     })*/
+
+    //地图搜索
+    var LocalSreachOptions = {
+        onSearchComplete:function (results) {
+            console.log(results);
+        }
+    };
+    var oLocalSreach = new BMap.LocalSearch(data[0].name,LocalSreachOptions);
+    console.dir(oLocalSreach)
+    oLocalSreach.search(data[0].name);
+    var result = oLocalSreach.getResults();
+    console.log(result)
 </script>
 </body>
 </html>
