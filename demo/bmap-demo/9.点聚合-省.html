@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta charset="utf-8">
+    <script src="../../jquery-3.1.1.js"></script>
+    <!--<script src="../../echarts.js"></script>-->
+    <!--<script src="../../bmap.js"></script>-->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=nTsNCxWYUDe9RK7aiNlzneDe42NKG1Sq"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
+</head>
+<body style="height: 100%; margin: 0">
+
+<h1>bmp--scatter 百度地图demo</h1>
+<div id="container" style="width: 1200px;height: 600px"></div>
+
+<div id="log"></div>
+
+<script type="text/javascript">
+    //百度地图API功能
+    var map = new BMap.Map("container");
+    var centerPoint = new BMap.Point(116.404, 39.915);
+    map.centerAndZoom(centerPoint, 5);       //指定地图初始中心点和缩放比例
+    map.enableScrollWheelZoom();             //启用滚轮放大缩小
+    map.enableDragging();                    //启用鼠标拖拽
+
+    //创建一个警告的标志点
+    var warning = new BMap.Icon("../warning.gif", new BMap.Size(25, 25));      //(url, (图片剪裁尺寸) )
+    warning.imageSize = {width: 25, height: 25};         //修改图片尺寸
+    //创建一个水滴图标
+    var vectorIconInfo = new BMap.Symbol(BMap_Symbol_SHAPE_POINT,{
+        scale: 0.8,//图标缩放大小
+        fillColor: "black",//填充颜色
+        fillOpacity: 1//填充透明度
+    });
+    var vectorIconWarning = new BMap.Symbol(BMap_Symbol_SHAPE_POINT,{
+        scale: 0.8,//图标缩放大小
+        fillColor: "yellow",//填充颜色
+        fillOpacity: 0.8//填充透明度
+    });
+
+
+    //添加海量点
+    //1.数据准备
+    var data = [
+        {status:0,value:9,location:{province:"江苏省",city:"海门市",zone:"海门"}},
+        {status:0,value:12,location:{province:"内蒙古自治区",city:"鄂尔多斯市",zone:"鄂尔多斯"}},
+        {status:1,value:12,location:{province:"山东省",city:"招远市",zone:"招远"}},
+        {status:1,value:12,location:{province:"浙江省",city:"舟山市",zone:"舟山"}},
+        {status:0,value:14,location:{province:"黑龙江省",city:"齐齐哈尔市",zone:"齐齐哈尔"}},
+        {status:1,value:15,location:{province:"内蒙古自治区",city:"赤峰市",zone:"赤峰"}},
+        {status:1,value:16,location:{province:"山东省",city:"乳山市",zone:"乳山"}},
+        {status:0,value:18,location:{province:"甘肃省",city:"金昌市",zone:"金昌"}},
+        {status:0,value:18,location:{province:"福建省",city:"泉州市",zone:"泉州"}},
+        {status:1,value:19,location:{province:"江苏省",city:"盐城市",zone:"盐城"}},
+        {status:0,value:21,location:{province:"山东省",city:"莱西市",zone:"莱西"}},
+        {status:0,value:21,location:{province:"西藏自治区",city:"拉萨市",zone:"拉萨"}},
+        {status:1,value:21,location:{province:"山东省",city:"胶南市",zone:"胶南"}},
+        {status:0,value:22,location:{province:"江苏省",city:"南通市",zone:"南通"}},
+        {status:0,value:23,location:{province:"广东省",city:"梅州市",zone:"梅州"}},
+        {status:0,value:24,location:{province:"山东省",city:"威海市",zone:"威海"}},
+        {status:1,value:24,location:{province:"四川省",city:"攀枝花市",zone:"攀枝花"}},
+        {status:0,value:25,location:{province:"广东省",city:"汕尾市",zone:"汕尾"}},
+        {status:0,value:25,location:{province:"福建省",city:"厦门市",zone:"厦门"}},
+        {status:0,value:25,location:{province:"辽宁省",city:"丹东市",zone:"丹东"}},
+        {status:0,value:25,location:{province:"山东省",city:"日照市",zone:"日照"}},
+        {status:0,value:25,location:{province:"山东省",city:"文登市",zone:"文登"}},
+        {status:0,value:25,location:{province:"河北省",city:"承德市",zone:"承德"}},
+        {status:0,value:26,location:{province:"江苏省",city:"太仓市",zone:"太仓"}},
+        {status:0,value:26,location:{province:"云南省",city:"曲靖市",zone:"曲靖"}},
+        {status:0,value:26,location:{province:"山东省",city:"烟台市",zone:"烟台"}},
+        {status:0,value:27,location:{province:"广东省",city:"潮州市",zone:"潮州"}},
+        {status:0,value:27,location:{province:"山东省",city:"青岛市",zone:"青岛"}},
+        {status:2,value:27,location:{province:"福建省",city:"福州市",zone:"福州"}},
+        {status:0,value:28,location:{province:"辽宁省",city:"瓦房店市",zone:"瓦房店"}},
+        {status:0,value:29,location:{province:"山东省",city:"即墨市",zone:"即墨"}},
+        {status:2,value:30,location:{province:"辽宁省",city:"抚顺市",zone:"抚顺"}},
+        {status:0,value:30,location:{province:"广东省",city:"云浮市",zone:"云浮"}},
+        {status:0,value:31,location:{province:"云南省",city:"玉溪市",zone:"玉溪"}},
+        {status:0,value:31,location:{province:"河北省",city:"张家口市",zone:"张家口"}},
+        {status:0,value:31,location:{province:"山西省",city:"阳泉市",zone:"阳泉"}},
+        {status:1,value:31,location:{province:"山东省",city:"莱州市",zone:"莱州"}},
+        {status:0,value:32,location:{province:"浙江省",city:"湖州市",zone:"湖州"}},
+        {status:0,value:32,location:{province:"上海市",city:"上海市",zone:"上海"}},
+        {status:0,value:32,location:{province:"广东省",city:"汕头市",zone:"汕头"}},
+        {status:0,value:33,location:{province:"江苏省",city:"昆山市",zone:"昆山"}},
+        {status:0,value:33,location:{province:"浙江省",city:"宁波市",zone:"宁波"}},
+        {status:0,value:33,location:{province:"广东省",city:"湛江市",zone:"湛江"}},
+        {status:2,value:34,location:{province:"山东省",city:"荣成市",zone:"荣成"}},
+        {status:0,value:34,location:{province:"江苏省",city:"连云港市",zone:"连云港"}},
+        {status:0,value:35,location:{province:"江苏省",city:"常熟市",zone:"常熟"}},
+        {status:0,value:35,location:{province:"辽宁省",city:"葫芦岛市",zone:"葫芦岛"}},
+        {status:2,value:36,location:{province:"广东省",city:"东莞市",zone:"东莞"}},
+        {status:0,value:36,location:{province:"广东省",city:"河源市",zone:"河源"}},
+        {status:0,value:36,location:{province:"江苏省",city:"淮安市",zone:"淮安"}},
+        {status:0,value:36,location:{province:"江苏省",city:"泰州市",zone:"泰州"}},
+        {status:0,value:36,location:{province:"辽宁省",city:"营口市",zone:"营口"}},
+        {status:0,value:37,location:{province:"广西壮族自治区",city:"南宁市",zone:"南宁"}},
+        {status:0,value:37,location:{province:"广东省",city:"惠州市",zone:"惠州"}},
+        {status:0,value:37,location:{province:"江苏省",city:"江阴市",zone:"江阴"}},
+        {status:2,value:37,location:{province:"山东省",city:"蓬莱市",zone:"蓬莱"}},
+        {status:1,value:37,location:{province:"广东省",city:"韶关市",zone:"韶关"}},
+        {status:2,value:38,location:{province:"甘肃省",city:"嘉峪关市",zone:"嘉峪关"}},
+        {status:0,value:38,location:{province:"陕西省",city:"延安市",zone:"延安"}},
+        {status:0,value:38,location:{province:"广东省",city:"清远市",zone:"清远"}},
+        {status:0,value:38,location:{province:"广东省",city:"广州市",zone:"广州"}},
+        {status:0,value:39,location:{province:"山西省",city:"太原市",zone:"太原"}},
+        {status:0,value:39,location:{province:"广东省",city:"中山市",zone:"中山"}},
+        {status:0,value:39,location:{province:"云南省",city:"昆明市",zone:"昆明"}},
+        {status:0,value:39,location:{province:"山东省",city:"寿光市",zone:"寿光"}},
+        {status:0,value:40,location:{province:"辽宁省",city:"盘锦市",zone:"盘锦"}},
+        {status:0,value:40,location:{province:"山西省",city:"长治市",zone:"长治"}},
+        {status:0,value:41,location:{province:"广东省",city:"深圳市",zone:"深圳"}},
+        {status:0,value:41,location:{province:"广东省",city:"珠海市",zone:"珠海"}},
+        {status:0,value:42,location:{province:"江苏省",city:"宿迁市",zone:"宿迁"}},
+        {status:0,value:43,location:{province:"陕西省",city:"铜川市",zone:"铜川"}},
+        {status:1,value:43,location:{province:"陕西省",city:"咸阳市",zone:"咸阳"}},
+        {status:0,value:44,location:{province:"广东省",city:"佛山市",zone:"佛山"}},
+        {status:0,value:44,location:{province:"山东省",city:"平度市",zone:"平度"}},
+        {status:0,value:44,location:{province:"海南省",city:"海口市",zone:"海口"}},
+        {status:0,value:44,location:{province:"山东省",city:"章丘市",zone:"章丘"}},
+        {status:0,value:45,location:{province:"广东省",city:"肇庆市",zone:"肇庆"}},
+        {status:0,value:45,location:{province:"辽宁省",city:"大连市",zone:"大连"}},
+        {status:0,value:46,location:{province:"广东省",city:"江门市",zone:"江门"}},
+        {status:2,value:47,location:{province:"山西省",city:"临汾市",zone:"临汾"}},
+        {status:0,value:47,location:{province:"江苏省",city:"吴江市",zone:"吴江"}},
+        {status:0,value:47,location:{province:"宁夏回族自治区",city:"石嘴山市",zone:"石嘴山"}},
+        {status:0,value:49,location:{province:"辽宁省",city:"沈阳市",zone:"沈阳"}},
+        {status:0,value:50,location:{province:"江苏省",city:"苏州市",zone:"苏州"}},
+        {status:0,value:50,location:{province:"广东省",city:"茂名市",zone:"茂名"}},
+        {status:0,value:50,location:{province:"浙江省",city:"嘉兴市",zone:"嘉兴"}},
+        {status:0,value:51,location:{province:"吉林省",city:"长春市",zone:"长春"}},
+        {status:0,value:51,location:{province:"山东省",city:"胶州市",zone:"胶州"}},
+        {status:0,value:52,location:{province:"宁夏回族自治区",city:"银川市",zone:"银川"}},
+        {status:2,value:52,location:{province:"江苏省",city:"张家港市",zone:"张家港"}},
+        {status:0,value:52,location:{province:"辽宁省",city:"锦州市",zone:"锦州"}},
+        {status:0,value:53,location:{province:"江西省",city:"南昌市",zone:"南昌"}},
+        {status:0,value:54,location:{province:"广西壮族自治区",city:"柳州市",zone:"柳州"}},
+        {status:0,value:54,location:{province:"四川省",city:"自贡市",zone:"自贡"}},
+        {status:0,value:54,location:{province:"吉林省",city:"吉林市",zone:"吉林"}},
+        {status:0,value:54,location:{province:"海南省",city:"三亚市",zone:"三亚"}},
+        {status:0,value:56,location:{province:"广东省",city:"阳江市",zone:"阳江"}},
+        {status:0,value:56,location:{province:"四川省",city:"泸州市",zone:"泸州"}},
+        {status:0,value:57,location:{province:"广东省",city:"揭阳市",zone:"揭阳"}},
+        {status:0,value:57,location:{province:"青海省",city:"西宁市",zone:"西宁"}},
+        {status:0,value:57,location:{province:"四川省",city:"宜宾市",zone:"宜宾"}},
+        {status:0,value:58,location:{province:"四川省",city:"成都市",zone:"成都"}},
+        {status:0,value:58,location:{province:"山西省",city:"大同市",zone:"大同"}},
+        {status:2,value:58,location:{province:"河南省",city:"三门峡市",zone:"三门峡"}},
+        {status:0,value:58,location:{province:"江苏省",city:"镇江市",zone:"镇江"}},
+        {status:0,value:59,location:{province:"内蒙古自治区",city:"呼和浩特市",zone:"呼和浩特"}},
+        {status:1,value:59,location:{province:"广西壮族自治区",city:"桂林市",zone:"桂林"}},
+        {status:1,value:59,location:{province:"江苏省",city:"宜兴市",zone:"宜兴"}},
+        {status:1,value:59,location:{province:"湖南省",city:"张家界市",zone:"张家界"}},
+        {status:0,value:60,location:{province:"广西壮族自治区",city:"北海市",zone:"北海"}},
+        {status:0,value:61,location:{province:"陕西省",city:"西安市",zone:"西安"}},
+        {status:0,value:62,location:{province:"江苏省",city:"金坛市",zone:"金坛"}},
+        {status:0,value:62,location:{province:"黑龙江省",city:"牡丹江市",zone:"牡丹江"}},
+        {status:0,value:63,location:{province:"山东省",city:"东营市",zone:"东营"}},
+        {status:0,value:63,location:{province:"贵州省",city:"遵义市",zone:"遵义"}},
+        {status:0,value:63,location:{province:"浙江省",city:"绍兴市",zone:"绍兴"}},
+        {status:0,value:64,location:{province:"江苏省",city:"扬州市",zone:"扬州"}},
+        {status:0,value:64,location:{province:"山东省",city:"潍坊市",zone:"潍坊"}},
+        {status:0,value:65,location:{province:"江苏省",city:"常州市",zone:"常州"}},
+        {status:0,value:66,location:{province:"浙江省",city:"台州市",zone:"台州"}},
+        {status:0,value:67,location:{province:"重庆市",city:"重庆市",zone:"重庆"}},
+        {status:0,value:67,location:{province:"江苏省",city:"南京市",zone:"南京"}},
+        {status:0,value:70,location:{province:"山东省",city:"滨州市",zone:"滨州"}},
+        {status:0,value:71,location:{province:"贵州省",city:"贵阳市",zone:"贵阳"}},
+        {status:0,value:71,location:{province:"江苏省",city:"无锡市",zone:"无锡"}},
+        {status:0,value:71,location:{province:"新疆维吾尔自治区",city:"克拉玛依市",zone:"克拉玛依"}},
+        {status:0,value:72,location:{province:"辽宁省",city:"本溪市",zone:"本溪"}},
+        {status:0,value:72,location:{province:"陕西省",city:"渭南市",zone:"渭南"}},
+        {status:0,value:72,location:{province:"安徽省",city:"马鞍山市",zone:"马鞍山"}},
+        {status:0,value:72,location:{province:"陕西省",city:"宝鸡市",zone:"宝鸡"}},
+        {status:0,value:75,location:{province:"河南省",city:"焦作市",zone:"焦作"}},
+        {status:0,value:75,location:{province:"江苏省",city:"句容市",zone:"句容"}},
+        {status:0,value:79,location:{province:"江苏省",city:"徐州市",zone:"徐州"}},
+        {status:0,value:79,location:{province:"北京市",city:"北京市",zone:"北京"}},
+        {status:0,value:80,location:{province:"河北省",city:"衡水市",zone:"衡水"}},
+        {status:0,value:80,location:{province:"内蒙古自治区",city:"包头市",zone:"包头"}},
+        {status:0,value:80,location:{province:"四川省",city:"绵阳市",zone:"绵阳"}},
+        {status:1,value:84,location:{province:"新疆维吾尔自治区",city:"乌鲁木齐市",zone:"乌鲁木齐"}},
+        {status:0,value:84,location:{province:"山东省",city:"枣庄市",zone:"枣庄"}},
+        {status:0,value:84,location:{province:"浙江省",city:"杭州市",zone:"杭州"}},
+        {status:0,value:85,location:{province:"山东省",city:"淄博市",zone:"淄博"}},
+        {status:0,value:86,location:{province:"江苏省",city:"溧阳市",zone:"溧阳"}},
+        {status:0,value:86,location:{province:"辽宁省",city:"鞍山市",zone:"鞍山"}},
+        {status:0,value:86,location:{province:"河南省",city:"安阳市",zone:"安阳"}},
+        {status:0,value:90,location:{province:"新疆维吾尔自治区",city:"库尔勒市",zone:"库尔勒"}},
+        {status:0,value:90,location:{province:"河南省",city:"开封市",zone:"开封"}},
+        {status:0,value:92,location:{province:"山东省",city:"济南市",zone:"济南"}},
+        {status:0,value:93,location:{province:"浙江省",city:"温州市",zone:"温州"}},
+        {status:0,value:95,location:{province:"江西省",city:"九江市",zone:"九江"}},
+        {status:2,value:96,location:{province:"四川省",city:"德阳市",zone:"德阳"}},
+        {status:0,value:98,location:{province:"河北省",city:"邯郸市",zone:"邯郸"}},
+        {status:0,value:99,location:{province:"浙江省",city:"临安市",zone:"临安"}},
+        {status:0,value:99,location:{province:"甘肃省",city:"兰州市",zone:"兰州"}},
+        {status:0,value:100,location:{province:"河北省",city:"沧州市",zone:"沧州"}},
+        {status:1,value:103,location:{province:"山东省",city:"临沂市",zone:"临沂"}},
+        {status:1,value:104,location:{province:"四川省",city:"南充市",zone:"南充"}},
+        {status:2,value:105,location:{province:"浙江省",city:"富阳市",zone:"富阳"}},
+        {status:0,value:106,location:{province:"山东省",city:"泰安市",zone:"泰安"}},
+        {status:0,value:112,location:{province:"天津市",city:"天津市",zone:"天津"}},
+        {status:1,value:112,location:{province:"黑龙江省",city:"哈尔滨市",zone:"哈尔滨"}},
+        {status:0,value:113,location:{province:"河南省",city:"郑州市",zone:"郑州"}},
+        {status:0,value:114,location:{province:"安徽省",city:"芜湖市",zone:"芜湖"}},
+        {status:2,value:116,location:{province:"河北省",city:"唐山市",zone:"唐山"}},
+        {status:1,value:117,location:{province:"河北省",city:"邢台市",zone:"邢台"}},
+        {status:0,value:119,location:{province:"山东省",city:"济宁市",zone:"济宁"}},
+        {status:0,value:119,location:{province:"河南省",city:"平顶山市",zone:"平顶山"}},
+        {status:0,value:119,location:{province:"浙江省",city:"诸暨市",zone:"诸暨"}},
+        {status:0,value:120,location:{province:"山东省",city:"德州市",zone:"德州"}},
+        {status:0,value:120,location:{province:"山东省",city:"聊城市",zone:"聊城"}},
+        {status:0,value:127,location:{province:"湖北省",city:"宜昌市",zone:"宜昌"}},
+        {status:0,value:130,location:{province:"浙江省",city:"义乌市",zone:"义乌"}},
+        {status:0,value:132,location:{province:"浙江省",city:"丽水市",zone:"丽水"}},
+        {status:0,value:133,location:{province:"河南省",city:"洛阳市",zone:"洛阳"}},
+        {status:0,value:134,location:{province:"河北省",city:"秦皇岛市",zone:"秦皇岛"}},
+        {status:2,value:136,location:{province:"湖南省",city:"株洲市",zone:"株洲"}},
+        {status:2,value:143,location:{province:"河北省",city:"石家庄市",zone:"石家庄"}},
+        {status:2,value:147,location:{province:"山东省",city:"莱芜市",zone:"莱芜"}},
+        {status:0,value:148,location:{province:"湖南省",city:"常德市",zone:"常德"}},
+        {status:0,value:152,location:{province:"浙江省",city:"金华市",zone:"金华"}},
+        {status:0,value:153,location:{province:"湖南省",city:"岳阳市",zone:"岳阳"}},
+        {status:0,value:154,location:{province:"湖南省",city:"长沙市",zone:"长沙"}},
+        {status:0,value:157,location:{province:"浙江省",city:"衢州市",zone:"衢州"}},
+        {status:1,value:169,location:{province:"河北省",city:"廊坊市",zone:"廊坊"}},
+        {status:1,value:175,location:{province:"山东省",city:"菏泽市",zone:"菏泽"}},
+        {status:0,value:177,location:{province:"安徽省",city:"合肥市",zone:"合肥"}},
+        {status:1,value:193,location:{province:"黑龙江省",city:"大庆市",zone:"大庆"}},
+        {status:0,value:194,location:{province:"湖北省",city:"武汉市",zone:"武汉"}},
+        {status:0,value:229,location:{province:"湖南省",city:"湘潭市",zone:"湘潭"}},
+        {status:0,value:273,location:{province:"河北省",city:"保定市",zone:"保定"}},
+        {status:0,value:279,location:{province:"湖北省",city:"荆州市",zone:"荆州"}}
+    ];
+    /*var data = [
+     {status: 0, name: "海门", value: 9},
+     {status: 0, name: "鄂尔多斯", value: 12},
+     {status: 1, name: "招远", value: 12},
+     {status: 1, name: "舟山", value: 12},
+     {status: 0, name: "齐齐哈尔", value: 14},
+     {status: 1, name: "盐城", value: 15},
+     {status: 1, name: "赤峰", value: 16},
+     {status: 0, name: "青岛", value: 18},
+     {status: 0, name: "乳山", value: 18},
+     {status: 1, name: "金昌", value: 19},
+     {status: 0, name: "泉州", value: 21},
+     {status: 0, name: "莱西", value: 21},
+     {status: 1, name: "日照", value: 21},
+     {status: 0, name: "胶南", value: 22},
+     {status: 0, name: "南通", value: 23},
+     {status: 0, name: "拉萨", value: 24},
+     {status: 1, name: "云浮", value: 24},
+     {status: 0, name: "梅州", value: 25},
+     {status: 0, name: "文登", value: 25},
+     {status: 0, name: "上海", value: 25},
+     {status: 0, name: "攀枝花", value: 25},
+     {status: 0, name: "威海", value: 25},
+     {status: 0, name: "承德", value: 25},
+     {status: 0, name: "厦门", value: 26},
+     {status: 0, name: "汕尾", value: 26},
+     {status: 0, name: "潮州", value: 26},
+     {status: 0, name: "丹东", value: 27},
+     {status: 0, name: "太仓", value: 27},
+     {status: 2, name: "曲靖", value: 27},
+     {status: 0, name: "烟台", value: 28},
+     {status: 0, name: "福州", value: 29},
+     {status: 2, name: "瓦房店", value: 30},
+     {status: 0, name: "即墨", value: 30},
+     {status: 0, name: "抚顺", value: 31},
+     {status: 0, name: "玉溪", value: 31},
+     {status: 0, name: "张家口", value: 31},
+     {status: 1, name: "阳泉", value: 31},
+     {status: 0, name: "莱州", value: 32},
+     {status: 0, name: "湖州", value: 32},
+     {status: 0, name: "汕头", value: 32},
+     {status: 0, name: "昆山", value: 33},
+     {status: 0, name: "宁波", value: 33},
+     {status: 0, name: "湛江", value: 33},
+     {status: 2, name: "揭阳", value: 34},
+     {status: 0, name: "荣成", value: 34},
+     {status: 0, name: "连云港", value: 35},
+     {status: 0, name: "葫芦岛", value: 35},
+     {status: 2, name: "常熟", value: 36},
+     {status: 0, name: "东莞", value: 36},
+     {status: 0, name: "河源", value: 36},
+     {status: 0, name: "淮安", value: 36},
+     {status: 0, name: "泰州", value: 36},
+     {status: 0, name: "南宁", value: 37},
+     {status: 0, name: "营口", value: 37},
+     {status: 0, name: "惠州", value: 37},
+     {status: 2, name: "江阴", value: 37},
+     {status: 1, name: "蓬莱", value: 37},
+     {status: 2, name: "韶关", value: 38},
+     {status: 0, name: "嘉峪关", value: 38},
+     {status: 0, name: "广州", value: 38},
+     {status: 0, name: "延安", value: 38},
+     {status: 0, name: "太原", value: 39},
+     {status: 0, name: "清远", value: 39},
+     {status: 0, name: "中山", value: 39},
+     {status: 0, name: "昆明", value: 39},
+     {status: 0, name: "寿光", value: 40},
+     {status: 0, name: "盘锦", value: 40},
+     {status: 0, name: "长治", value: 41},
+     {status: 0, name: "深圳", value: 41},
+     {status: 0, name: "珠海", value: 42},
+     {status: 0, name: "宿迁", value: 43},
+     {status: 1, name: "咸阳", value: 43},
+     {status: 0, name: "铜川", value: 44},
+     {status: 0, name: "平度", value: 44},
+     {status: 0, name: "佛山", value: 44},
+     {status: 0, name: "海口", value: 44},
+     {status: 0, name: "江门", value: 45},
+     {status: 0, name: "章丘", value: 45},
+     {status: 0, name: "肇庆", value: 46},
+     {status: 2, name: "大连", value: 47},
+     {status: 0, name: "临汾", value: 47},
+     {status: 0, name: "吴江", value: 47},
+     {status: 0, name: "石嘴山", value: 49},
+     {status: 0, name: "沈阳", value: 50},
+     {status: 0, name: "苏州", value: 50},
+     {status: 0, name: "茂名", value: 50},
+     {status: 0, name: "嘉兴", value: 51},
+     {status: 0, name: "长春", value: 51},
+     {status: 0, name: "胶州", value: 52},
+     {status: 2, name: "银川", value: 52},
+     {status: 0, name: "张家港", value: 52},
+     {status: 0, name: "三门峡", value: 53},
+     {status: 0, name: "锦州", value: 54},
+     {status: 0, name: "南昌", value: 54},
+     {status: 0, name: "柳州", value: 54},
+     {status: 0, name: "三亚", value: 54},
+     {status: 0, name: "自贡", value: 56},
+     {status: 0, name: "吉林", value: 56},
+     {status: 0, name: "阳江", value: 57},
+     {status: 0, name: "泸州", value: 57},
+     {status: 0, name: "西宁", value: 57},
+     {status: 0, name: "宜宾", value: 58},
+     {status: 0, name: "呼和浩特", value: 58},
+     {status: 2, name: "成都", value: 58},
+     {status: 0, name: "大同", value: 58},
+     {status: 0, name: "镇江", value: 59},
+     {status: 1, name: "桂林", value: 59},
+     {status: 1, name: "张家界", value: 59},
+     {status: 1, name: "宜兴", value: 59},
+     {status: 0, name: "北海", value: 60},
+     {status: 0, name: "西安", value: 61},
+     {status: 0, name: "金坛", value: 62},
+     {status: 0, name: "东营", value: 62},
+     {status: 0, name: "牡丹江", value: 63},
+     {status: 0, name: "遵义", value: 63},
+     {status: 0, name: "绍兴", value: 63},
+     {status: 0, name: "扬州", value: 64},
+     {status: 0, name: "常州", value: 64},
+     {status: 0, name: "潍坊", value: 65},
+     {status: 0, name: "重庆", value: 66},
+     {status: 0, name: "台州", value: 67},
+     {status: 0, name: "南京", value: 67},
+     {status: 0, name: "滨州", value: 70},
+     {status: 0, name: "贵阳", value: 71},
+     {status: 0, name: "无锡", value: 71},
+     {status: 0, name: "本溪", value: 71},
+     {status: 0, name: "克拉玛依", value: 72},
+     {status: 0, name: "渭南", value: 72},
+     {status: 0, name: "马鞍山", value: 72},
+     {status: 0, name: "宝鸡", value: 72},
+     {status: 0, name: "焦作", value: 75},
+     {status: 0, name: "句容", value: 75},
+     {status: 0, name: "北京", value: 79},
+     {status: 0, name: "徐州", value: 79},
+     {status: 0, name: "衡水", value: 80},
+     {status: 0, name: "包头", value: 80},
+     {status: 0, name: "绵阳", value: 80},
+     {status: 1, name: "乌鲁木齐", value: 84},
+     {status: 0, name: "枣庄", value: 84},
+     {status: 0, name: "杭州", value: 84},
+     {status: 0, name: "淄博", value: 85},
+     {status: 0, name: "鞍山", value: 86},
+     {status: 0, name: "溧阳", value: 86},
+     {status: 0, name: "库尔勒", value: 86},
+     {status: 0, name: "安阳", value: 90},
+     {status: 0, name: "开封", value: 90},
+     {status: 0, name: "济南", value: 92},
+     {status: 0, name: "德阳", value: 93},
+     {status: 0, name: "温州", value: 95},
+     {status: 2, name: "九江", value: 96},
+     {status: 0, name: "邯郸", value: 98},
+     {status: 0, name: "临安", value: 99},
+     {status: 0, name: "兰州", value: 99},
+     {status: 0, name: "沧州", value: 100},
+     {status: 1, name: "临沂", value: 103},
+     {status: 1, name: "南充", value: 104},
+     {status: 2, name: "天津", value: 105},
+     {status: 0, name: "富阳", value: 106},
+     {status: 0, name: "泰安", value: 112},
+     {status: 1, name: "诸暨", value: 112},
+     {status: 0, name: "郑州", value: 113},
+     {status: 0, name: "哈尔滨", value: 114},
+     {status: 2, name: "聊城", value: 116},
+     {status: 1, name: "芜湖", value: 117},
+     {status: 0, name: "唐山", value: 119},
+     {status: 0, name: "平顶山", value: 119},
+     {status: 0, name: "邢台", value: 119},
+     {status: 0, name: "德州", value: 120},
+     {status: 0, name: "济宁", value: 120},
+     {status: 0, name: "荆州", value: 127},
+     {status: 0, name: "宜昌", value: 130},
+     {status: 0, name: "义乌", value: 132},
+     {status: 0, name: "丽水", value: 133},
+     {status: 0, name: "洛阳", value: 134},
+     {status: 2, name: "秦皇岛", value: 136},
+     {status: 2, name: "株洲", value: 143},
+     {status: 2, name: "石家庄", value: 147},
+     {status: 0, name: "莱芜", value: 148},
+     {status: 0, name: "常德", value: 152},
+     {status: 0, name: "保定", value: 153},
+     {status: 0, name: "湘潭", value: 154},
+     {status: 0, name: "金华", value: 157},
+     {status: 1, name: "岳阳", value: 169},
+     {status: 1, name: "长沙", value: 175},
+     {status: 0, name: "衢州", value: 177},
+     {status: 1, name: "廊坊", value: 193},
+     {status: 0, name: "菏泽", value: 194},
+     {status: 0, name: "合肥", value: 229},
+     {status: 0, name: "武汉", value: 273},
+     {status: 0, name: "大庆", value: 279}
+     ];*/
+    var geoCoordMap = {
+        '海门': [121.15, 31.89],
+        '鄂尔多斯': [109.781327, 39.608266],
+        '招远': [120.38, 37.35],
+        '舟山': [122.207216, 29.985295],
+        '齐齐哈尔': [123.97, 47.33],
+        '盐城': [120.13, 33.38],
+        '赤峰': [118.87, 42.28],
+        '青岛': [120.33, 36.07],
+        '乳山': [121.52, 36.89],
+        '金昌': [102.188043, 38.520089],
+        '泉州': [118.58, 24.93],
+        '莱西': [120.53, 36.86],
+        '日照': [119.46, 35.42],
+        '胶南': [119.97, 35.88],
+        '南通': [121.05, 32.08],
+        '拉萨': [91.11, 29.97],
+        '云浮': [112.02, 22.93],
+        '梅州': [116.1, 24.55],
+        '文登': [122.05, 37.2],
+        '上海': [121.48, 31.22],
+        '攀枝花': [101.718637, 26.582347],
+        '威海': [122.1, 37.5],
+        '承德': [117.93, 40.97],
+        '厦门': [118.1, 24.46],
+        '汕尾': [115.375279, 22.786211],
+        '潮州': [116.63, 23.68],
+        '丹东': [124.37, 40.13],
+        '太仓': [121.1, 31.45],
+        '曲靖': [103.79, 25.51],
+        '烟台': [121.39, 37.52],
+        '福州': [119.3, 26.08],
+        '瓦房店': [121.979603, 39.627114],
+        '即墨': [120.45, 36.38],
+        '抚顺': [123.97, 41.97],
+        '玉溪': [102.52, 24.35],
+        '张家口': [114.87, 40.82],
+        '阳泉': [113.57, 37.85],
+        '莱州': [119.942327, 37.177017],
+        '湖州': [120.1, 30.86],
+        '汕头': [116.69, 23.39],
+        '昆山': [120.95, 31.39],
+        '宁波': [121.56, 29.86],
+        '湛江': [110.359377, 21.270708],
+        '揭阳': [116.35, 23.55],
+        '荣成': [122.41, 37.16],
+        '连云港': [119.16, 34.59],
+        '葫芦岛': [120.836932, 40.711052],
+        '常熟': [120.74, 31.64],
+        '东莞': [113.75, 23.04],
+        '河源': [114.68, 23.73],
+        '淮安': [119.15, 33.5],
+        '泰州': [119.9, 32.49],
+        '南宁': [108.33, 22.84],
+        '营口': [122.18, 40.65],
+        '惠州': [114.4, 23.09],
+        '江阴': [120.26, 31.91],
+        '蓬莱': [120.75, 37.8],
+        '韶关': [113.62, 24.84],
+        '嘉峪关': [98.289152, 39.77313],
+        '广州': [113.23, 23.16],
+        '延安': [109.47, 36.6],
+        '太原': [112.53, 37.87],
+        '清远': [113.01, 23.7],
+        '中山': [113.38, 22.52],
+        '昆明': [102.73, 25.04],
+        '寿光': [118.73, 36.86],
+        '盘锦': [122.070714, 41.119997],
+        '长治': [113.08, 36.18],
+        '深圳': [114.07, 22.62],
+        '珠海': [113.52, 22.3],
+        '宿迁': [118.3, 33.96],
+        '咸阳': [108.72, 34.36],
+        '铜川': [109.11, 35.09],
+        '平度': [119.97, 36.77],
+        '佛山': [113.11, 23.05],
+        '海口': [110.35, 20.02],
+        '江门': [113.06, 22.61],
+        '章丘': [117.53, 36.72],
+        '肇庆': [112.44, 23.05],
+        '大连': [121.62, 38.92],
+        '临汾': [111.5, 36.08],
+        '吴江': [120.63, 31.16],
+        '石嘴山': [106.39, 39.04],
+        '沈阳': [123.38, 41.8],
+        '苏州': [120.62, 31.32],
+        '茂名': [110.88, 21.68],
+        '嘉兴': [120.76, 30.77],
+        '长春': [125.35, 43.88],
+        '胶州': [120.03336, 36.264622],
+        '银川': [106.27, 38.47],
+        '张家港': [120.555821, 31.875428],
+        '三门峡': [111.19, 34.76],
+        '锦州': [121.15, 41.13],
+        '南昌': [115.89, 28.68],
+        '柳州': [109.4, 24.33],
+        '三亚': [109.511909, 18.252847],
+        '自贡': [104.778442, 29.33903],
+        '吉林': [126.57, 43.87],
+        '阳江': [111.95, 21.85],
+        '泸州': [105.39, 28.91],
+        '西宁': [101.74, 36.56],
+        '宜宾': [104.56, 29.77],
+        '呼和浩特': [111.65, 40.82],
+        '成都': [104.06, 30.67],
+        '大同': [113.3, 40.12],
+        '镇江': [119.44, 32.2],
+        '桂林': [110.28, 25.29],
+        '张家界': [110.479191, 29.117096],
+        '宜兴': [119.82, 31.36],
+        '北海': [109.12, 21.49],
+        '西安': [108.95, 34.27],
+        '金坛': [119.56, 31.74],
+        '东营': [118.49, 37.46],
+        '牡丹江': [129.58, 44.6],
+        '遵义': [106.9, 27.7],
+        '绍兴': [120.58, 30.01],
+        '扬州': [119.42, 32.39],
+        '常州': [119.95, 31.79],
+        '潍坊': [119.1, 36.62],
+        '重庆': [106.54, 29.59],
+        '台州': [121.420757, 28.656386],
+        '南京': [118.78, 32.04],
+        '滨州': [118.03, 37.36],
+        '贵阳': [106.71, 26.57],
+        '无锡': [120.29, 31.59],
+        '本溪': [123.73, 41.3],
+        '克拉玛依': [84.77, 45.59],
+        '渭南': [109.5, 34.52],
+        '马鞍山': [118.48, 31.56],
+        '宝鸡': [107.15, 34.38],
+        '焦作': [113.21, 35.24],
+        '句容': [119.16, 31.95],
+        '北京': [116.46, 39.92],
+        '徐州': [117.2, 34.26],
+        '衡水': [115.72, 37.72],
+        '包头': [110, 40.58],
+        '绵阳': [104.73, 31.48],
+        '乌鲁木齐': [87.68, 43.77],
+        '枣庄': [117.57, 34.86],
+        '杭州': [120.19, 30.26],
+        '淄博': [118.05, 36.78],
+        '鞍山': [122.85, 41.12],
+        '溧阳': [119.48, 31.43],
+        '库尔勒': [86.06, 41.68],
+        '安阳': [114.35, 36.1],
+        '开封': [114.35, 34.79],
+        '济南': [117, 36.65],
+        '德阳': [104.37, 31.13],
+        '温州': [120.65, 28.01],
+        '九江': [115.97, 29.71],
+        '邯郸': [114.47, 36.6],
+        '临安': [119.72, 30.23],
+        '兰州': [103.73, 36.03],
+        '沧州': [116.83, 38.33],
+        '临沂': [118.35, 35.05],
+        '南充': [106.110698, 30.837793],
+        '天津': [117.2, 39.13],
+        '富阳': [119.95, 30.07],
+        '泰安': [117.13, 36.18],
+        '诸暨': [120.23, 29.71],
+        '郑州': [113.65, 34.76],
+        '哈尔滨': [126.63, 45.75],
+        '聊城': [115.97, 36.45],
+        '芜湖': [118.38, 31.33],
+        '唐山': [118.02, 39.63],
+        '平顶山': [113.29, 33.75],
+        '邢台': [114.48, 37.05],
+        '德州': [116.29, 37.45],
+        '济宁': [116.59, 35.38],
+        '荆州': [112.239741, 30.335165],
+        '宜昌': [111.3, 30.7],
+        '义乌': [120.06, 29.32],
+        '丽水': [119.92, 28.45],
+        '洛阳': [112.44, 34.7],
+        '秦皇岛': [119.57, 39.95],
+        '株洲': [113.16, 27.83],
+        '石家庄': [114.48, 38.03],
+        '莱芜': [117.67, 36.19],
+        '常德': [111.69, 29.05],
+        '保定': [115.48, 38.85],
+        '湘潭': [112.91, 27.87],
+        '金华': [119.64, 29.12],
+        '岳阳': [113.09, 29.37],
+        '长沙': [113, 28.21],
+        '衢州': [118.88, 28.97],
+        '廊坊': [116.7, 39.53],
+        '菏泽': [115.480656, 35.23375],
+        '合肥': [117.27, 31.86],
+        '武汉': [114.31, 30.52],
+        '大庆': [125.03, 46.58]
+    };
+    function convertData(data) {
+        var res = [];
+        for (var i=0;i<data.length;i++){
+            var geoCoord = geoCoordMap[data[i].location.zone];
+            res.push(data[i]);
+            res[i].location.geoCoord = geoCoord;
+        }
+        return res;
+    }
+    var points = convertData(data);      //海量点的坐标
+
+    //2.添加信息窗口的配置选项
+    var options = {
+        width: 0,             //信息宽度
+        height: 0,             //信息高度
+        offset:{width:0,height:-20},
+        title: "信息窗口",       //信息窗口标题
+        enableMessage: true     //是否允许信息窗发送短息
+    };
+
+    //3.添加点到地图中
+    function addPoint(points, options) {
+        //points[i].status映射表
+        var schema = ["正常", "数据异常", "信号异常"];
+
+        var markers = [];
+        for (var i = 0; i < points.length; i++) {
+            var geoCoord = points[i].location.geoCoord;
+            var point = new BMap.Point(geoCoord[0], geoCoord[1]);
+            //添加数据的信息；   并对数据分类处理
+            var color = schema[points[i].status] === '数据异常' ? "red" : "green";
+            var content = points[i].name + '有<b> ' + points[i].value + ' </b>台设备，状态为<span style="color: ' + color + '">' + schema[points[i].status] + '</span>';
+
+            var option = {
+                title: points[i].name + "有" + points[i].value + "台设备，状态" + schema[points[i].status]
+            };
+            if (schema[points[i].status] === '数据异常'){
+                option.icon = warning;
+            }else if (schema[points[i].status] === '信号异常'){
+                option.icon = vectorIconWarning;
+            }else{
+                option.icon = vectorIconInfo;
+            }
+            var marker = new BMap.Marker(point,option);
+            map.addOverlay(marker);
+
+            markers.push(marker);
+
+            //添加自定义点击事件
+            addClickHandler(content,marker);
+        }
+
+//        var markerClusterer = new BMapLib.MarkerClusterer(map, {markers:markers});
+
+        //给点聚合添加样式
+        /*markerClusterer.setStyles([
+            {
+                url:'../warning.gif',  //图标路径
+                size: new BMap.Size(25, 25),  //图标大小
+                imageSize: {width: 25, height: 25},
+                textColor: '#fff',  //文字颜色
+                textSize: 14  //字体大小
+            }
+        ]);*/
+
+        function addClickHandler(content,marker) {
+            marker.addEventListener('click',function (e) {
+                openInfo(content, e);
+            })
+        }
+
+        function openInfo(content, e) {
+            var target = e.target;
+            var point = new BMap.Point(target.getPosition().lng,target.getPosition().lat);
+            var infoWindow = new BMap.InfoWindow(content, options);
+            map.openInfoWindow(infoWindow,point);
+        }
+
+        return markers;
+    }
+    addPoint(points, options);
+
+    //添加行政区划分
+    function getBoundary(name) {
+        var bdary = new BMap.Boundary();
+        bdary.get(name, function (rs) {
+//            map.clearOverlays();
+            var counts = rs.boundaries.length;
+            if (counts === 0) {
+                alert("未能获取当前输入的行政区");
+                return;
+            }
+
+            var pointArray = [];
+            for (var i = 0; i < counts; i++) {
+                var ply = new BMap.Polygon(rs.boundaries[i], {
+                    strokeWeight: 2,
+                    strokeColor: "#ff0000"
+                });
+                map.addOverlay(ply);
+                map.setViewport(pointArray);
+            }
+        })
+    }
+
+//    setTimeout(getBoundary("湖北"), 2000);
+
+    //添加缩放事件监听
+    map.addEventListener('zoomend',function (e) {
+        console.log(map.getZoom());
+        var markers = addPoint(points, options);
+        if ( map.getZoom() <= 8 ){
+            map.clearOverlays();
+//            markers.hide();
+            console.log("clear?")
+        }else{
+            addPoint(points, options);
+//            markers.show();
+        }
+//
+    });
+
+    function gatherMarker() {
+        function getSiteNum(data) {
+            var count = {};
+            var sites = [];
+            for (var i = 0; i < data.length; i++) {
+                var p = data[i].location.province;
+                if (!count[ p ]) {
+                    count[ p ] = 1;
+                }else{
+                    count[ p ]++;
+                }
+            }
+
+            for (var attr in count){
+                var site = {};
+                site.location = attr;
+                site.num = count[attr];
+                site.geoCoord = geoCoordMap[attr];
+                sites.push(site);
+            }
+            console.dir(sites);
+            return count;
+        }
+
+        getSiteNum(data);
+    }
+
+
+</script>
+</body>
+</html>

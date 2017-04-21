@@ -50,14 +50,21 @@
             location.city = result.city;
             location.zone = result.keyword;
             results.push(location);
-            console.dir(results);
+//            console.dir(results);
         }
 
     });
-    /*local.search("杨林尾");
+    local.search("湖北");
     setTimeout(function () {
         console.log(local.getResults());
-    },2000);*/
+        var info = local.getResults().ur[0];
+        var str = '';
+        for (var attr in info){
+            str += attr + ": " + info[attr] +"</br></br>";
+        }
+        document.getElementById("log").innerHTML = str;
+        console.log(local.getResults().ur[0].point);
+    },2000);
 
     //数据转换
     var data = [
@@ -253,29 +260,21 @@
         {status:0,value:279,location:{province:"湖北",city:"武汉市",zone:"大庆"}}
     ]
 
-    for (var i=0;i<data.length;i++){
-        /*(function (data,i) {
+    /*for (var i=0;i<data.length;i++){
+        /!*(function (data,i) {
             local.search(data[i].location.zone);
             var result = local.getResults();
             setTimeout(function () {
                 console.log(result);
             },2000)
-        })(data,i);*/
+        })(data,i);*!/
         local.search(data[i].location.zone);
     }
 
     for (var i=0;i<data.length;i++){
         data[i].location = results[i];
     }
-    /* var str = "";
-     for (var i=0;i<data.length;i++){
-
-     str += '{status:'+ data[i].status+',value:'+ data[i].value +',location:{provience:"'+ data[i].location.province +'",city:"'+ data[i].location.city +'",zone:"'+ data[i].name +'"}},</br>';
-     }
-     console.log(data);
-
-     document.getElementById('log').innerHTML = str;*/
-    console.dir(data)
+    console.dir(data)*/
 </script>
 </body>
 </html>
