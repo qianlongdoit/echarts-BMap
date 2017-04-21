@@ -618,6 +618,40 @@
         '武汉': [114.31, 30.52],
         '大庆': [125.03, 46.58]
     };
+    var geoCoordMap2 = {
+        "江苏省":[118.769502,32.066586],
+        "内蒙古自治区":[111.771822,40.823096],
+        "山东省":[117.02702,36.674414],
+        "黑龙江省":[126.669503,45.747709],
+        "浙江省":[120.160136,30.271487],
+        "福建省":[119.30304,26.106051],
+        "甘肃省":[103.83282,36.065479],
+        "西藏自治区":[91.124021,29.653148],
+        "广东省":[113.272698,23.137962],
+        "四川省":[104.082256,30.65679],
+        "辽宁省":[123.435847,41.841317],
+        "河北省":[114.476188,38.042284],
+        "云南省":[102.716147,25.05156],
+        "山西省":[112.569095,37.87976],
+        "上海市":[121.480237,31.236305],
+        "陕西省":[108.960637,34.271171],
+        "广西壮族自治区":[108.334063,22.821171],
+        "海南省":[110.355167,20.025669],
+        "宁夏回族自治区":[106.265275,38.476848],
+        "吉林省":[125.333383,43.901864],
+        "江西省":[115.91646,28.68047],
+        "青海省":[101.786572,36.627027],
+        "湖南省":[112.989982,28.118301],
+        "河南省":[113.759604,34.772024],
+        "重庆市":[106.557165,29.570997],
+        "贵州省":[106.713693,26.604242],
+        "新疆维吾尔自治区":[87.633574,43.799467],
+        "安徽省":[117.292218,31.867312],
+        "天津市":[117.205914,39.090908],
+        "湖北省":[114.348779,30.551595],
+        "北京市":[116.413554,39.911013]
+    };
+
     function convertData(data) {
         var res = [];
         for (var i=0;i<data.length;i++){
@@ -698,7 +732,7 @@
 
         return markers;
     }
-    addPoint(points, options);
+
 
     //添加行政区划分
     function getBoundary(name) {
@@ -725,48 +759,77 @@
 
 //    setTimeout(getBoundary("湖北"), 2000);
 
+
+    function getSiteNum(data) {
+        var count = {};
+        var sites = [];
+        for (var i = 0; i < data.length; i++) {
+            var p = data[i].location.province;
+            if (!count[ p ]) {
+                count[ p ] = 1;
+            }else{
+                count[ p ]++;
+            }
+        }
+
+        for (var attr in count){
+            var site = {};
+            site.location = attr;
+            site.num = count[attr];
+            site.geoCoord = geoCoordMap2[attr];
+            sites.push(site);
+        }
+//            console.dir(sites);
+        return sites;
+        /*count = {
+         geoCoord: [lang,lat],
+         location: "江苏省",
+         num: 24
+         };*/
+    }
+
+
+    function addGatherMarker(points,option) {
+        console.log("execute")
+        for (var i=0;i<points.length;i++){
+//            创建标注点
+            var geoCoord = points[i].geoCoord;
+            var point = new BMap.Point(geoCoord[0],geoCoord[1]);
+            var marker = new BMap.Marker(point);
+            map.addOverlay(marker);
+//            创建标注本文
+            var content = points[i].location + "有" + points[i].num + "个站点";
+            var label = new BMap.Label(content,option);
+            marker.setLabel(label);
+        }
+    }
+
+    var gatherPoints = getSiteNum(data);
+    var gatherOption = {
+        offset:new BMap.Size(20,-10)
+    };
+
+//    addGatherMarker(gatherPoints,gatherOption);
+
     //添加缩放事件监听
     map.addEventListener('zoomend',function (e) {
         console.log(map.getZoom());
         var markers = addPoint(points, options);
         if ( map.getZoom() <= 8 ){
             map.clearOverlays();
-//            markers.hide();
+//            添加省聚集点
+            addGatherMarker(gatherPoints,gatherOption);
+
             console.log("clear?")
         }else{
+            map.clearOverlays();
             addPoint(points, options);
 //            markers.show();
         }
 //
     });
 
-    function gatherMarker() {
-        function getSiteNum(data) {
-            var count = {};
-            var sites = [];
-            for (var i = 0; i < data.length; i++) {
-                var p = data[i].location.province;
-                if (!count[ p ]) {
-                    count[ p ] = 1;
-                }else{
-                    count[ p ]++;
-                }
-            }
-
-            for (var attr in count){
-                var site = {};
-                site.location = attr;
-                site.num = count[attr];
-                site.geoCoord = geoCoordMap[attr];
-                sites.push(site);
-            }
-            console.dir(sites);
-            return count;
-        }
-
-        getSiteNum(data);
-    }
-
+    addGatherMarker(gatherPoints,gatherOption);
 
 </script>
 </body>
