@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta charset="utf-8">
+    <script src="../../jquery-3.1.1.js"></script>
+    <!--<script src="../../echarts.js"></script>-->
+    <!--<script src="../../bmap.js"></script>-->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=nTsNCxWYUDe9RK7aiNlzneDe42NKG1Sq"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
+</head>
+<body style="height: 100%; margin: 0">
+
+<h1>bmp--scatter 百度地图demo</h1>
+<div id="container" style="width: 1200px;height: 600px"></div>
+
+<div id="log"></div>
+
+<script type="text/javascript">
+    //百度地图API功能
+    var map = new BMap.Map("container");
+    var centerPoint = new BMap.Point(116.404, 39.915);
+    map.centerAndZoom(centerPoint, 5);       //指定地图初始中心点和缩放比例
+    map.enableScrollWheelZoom();             //启用滚轮放大缩小
+//    map.enableDragging();                    //启用鼠标拖拽 默认启用
+
+
+    var results = [];
+    var str = "";
+    //实例化一个搜索对象
+    var local = new BMap.LocalSearch(map, {
+        //搜索配置项
+        renderOptions:{
+            map: map,                   //展现结果的地图实例
+            panel: 'log',               //结果列表的HTML容器id或容器元素
+            selectFirstResult: true,    //是否选择第一个检索结果,对LocalSearch有效
+            autoViewport: true          //检索结束后是否自动调整地图视野
+        },
+        onMarkersSet:function () {
+            //标注添加完成后的回调函数
+
+        },
+        pageCapacity:5,                 //每页展示的数量
+        onSearchComplete:function (result) {
+            //搜索完成后的回调
+//            data[i].location.province = results.province;
+//            console.log(data)
+            var location = {};
+            location.province = result.province;
+            location.city = result.city;
+            location.zone = result.keyword;
+            results.push(location);
+            console.dir(results);
+        }
+
+    });
+    /*local.search("杨林尾");
+    setTimeout(function () {
+        console.log(local.getResults());
+    },2000);*/
+
+    //数据转换
+    var data = [
+        {status:0,value:9,location:{province:"湖北",city:"武汉市",zone:"海门"}},
+        {status:0,value:12,location:{province:"湖北",city:"武汉市",zone:"鄂尔多斯"}},
+        {status:1,value:12,location:{province:"湖北",city:"武汉市",zone:"招远"}},
+        {status:1,value:12,location:{province:"湖北",city:"武汉市",zone:"舟山"}},
+        {status:0,value:14,location:{province:"湖北",city:"武汉市",zone:"齐齐哈尔"}},
+        {status:1,value:15,location:{province:"湖北",city:"武汉市",zone:"盐城"}},
+        {status:1,value:16,location:{province:"湖北",city:"武汉市",zone:"赤峰"}},
+        {status:0,value:18,location:{province:"湖北",city:"武汉市",zone:"青岛"}},
+        {status:0,value:18,location:{province:"湖北",city:"武汉市",zone:"乳山"}},
+        {status:1,value:19,location:{province:"湖北",city:"武汉市",zone:"金昌"}},
+        {status:0,value:21,location:{province:"湖北",city:"武汉市",zone:"泉州"}},
+        {status:0,value:21,location:{province:"湖北",city:"武汉市",zone:"莱西"}},
+        {status:1,value:21,location:{province:"湖北",city:"武汉市",zone:"日照"}},
+        {status:0,value:22,location:{province:"湖北",city:"武汉市",zone:"胶南"}},
+        {status:0,value:23,location:{province:"湖北",city:"武汉市",zone:"南通"}},
+        {status:0,value:24,location:{province:"湖北",city:"武汉市",zone:"拉萨"}},
+        {status:1,value:24,location:{province:"湖北",city:"武汉市",zone:"云浮"}},
+        {status:0,value:25,location:{province:"湖北",city:"武汉市",zone:"梅州"}},
+        {status:0,value:25,location:{province:"湖北",city:"武汉市",zone:"文登"}},
+        {status:0,value:25,location:{province:"湖北",city:"武汉市",zone:"上海"}},
+        {status:0,value:25,location:{province:"湖北",city:"武汉市",zone:"攀枝花"}},
+        {status:0,value:25,location:{province:"湖北",city:"武汉市",zone:"威海"}},
+        {status:0,value:25,location:{province:"湖北",city:"武汉市",zone:"承德"}},
+        {status:0,value:26,location:{province:"湖北",city:"武汉市",zone:"厦门"}},
+        {status:0,value:26,location:{province:"湖北",city:"武汉市",zone:"汕尾"}},
+        {status:0,value:26,location:{province:"湖北",city:"武汉市",zone:"潮州"}},
+        {status:0,value:27,location:{province:"湖北",city:"武汉市",zone:"丹东"}},
+        {status:0,value:27,location:{province:"湖北",city:"武汉市",zone:"太仓"}},
+        {status:2,value:27,location:{province:"湖北",city:"武汉市",zone:"曲靖"}},
+        {status:0,value:28,location:{province:"湖北",city:"武汉市",zone:"烟台"}},
+        {status:0,value:29,location:{province:"湖北",city:"武汉市",zone:"福州"}},
+        {status:2,value:30,location:{province:"湖北",city:"武汉市",zone:"瓦房店"}},
+        {status:0,value:30,location:{province:"湖北",city:"武汉市",zone:"即墨"}},
+        {status:0,value:31,location:{province:"湖北",city:"武汉市",zone:"抚顺"}},
+        {status:0,value:31,location:{province:"湖北",city:"武汉市",zone:"玉溪"}},
+        {status:0,value:31,location:{province:"湖北",city:"武汉市",zone:"张家口"}},
+        {status:1,value:31,location:{province:"湖北",city:"武汉市",zone:"阳泉"}},
+        {status:0,value:32,location:{province:"湖北",city:"武汉市",zone:"莱州"}},
+        {status:0,value:32,location:{province:"湖北",city:"武汉市",zone:"湖州"}},
+        {status:0,value:32,location:{province:"湖北",city:"武汉市",zone:"汕头"}},
+        {status:0,value:33,location:{province:"湖北",city:"武汉市",zone:"昆山"}},
+        {status:0,value:33,location:{province:"湖北",city:"武汉市",zone:"宁波"}},
+        {status:0,value:33,location:{province:"湖北",city:"武汉市",zone:"湛江"}},
+        {status:2,value:34,location:{province:"湖北",city:"武汉市",zone:"揭阳"}},
+        {status:0,value:34,location:{province:"湖北",city:"武汉市",zone:"荣成"}},
+        {status:0,value:35,location:{province:"湖北",city:"武汉市",zone:"连云港"}},
+        {status:0,value:35,location:{province:"湖北",city:"武汉市",zone:"葫芦岛"}},
+        {status:2,value:36,location:{province:"湖北",city:"武汉市",zone:"常熟"}},
+        {status:0,value:36,location:{province:"湖北",city:"武汉市",zone:"东莞"}},
+        {status:0,value:36,location:{province:"湖北",city:"武汉市",zone:"河源"}},
+        {status:0,value:36,location:{province:"湖北",city:"武汉市",zone:"淮安"}},
+        {status:0,value:36,location:{province:"湖北",city:"武汉市",zone:"泰州"}},
+        {status:0,value:37,location:{province:"湖北",city:"武汉市",zone:"南宁"}},
+        {status:0,value:37,location:{province:"湖北",city:"武汉市",zone:"营口"}},
+        {status:0,value:37,location:{province:"湖北",city:"武汉市",zone:"惠州"}},
+        {status:2,value:37,location:{province:"湖北",city:"武汉市",zone:"江阴"}},
+        {status:1,value:37,location:{province:"湖北",city:"武汉市",zone:"蓬莱"}},
+        {status:2,value:38,location:{province:"湖北",city:"武汉市",zone:"韶关"}},
+        {status:0,value:38,location:{province:"湖北",city:"武汉市",zone:"嘉峪关"}},
+        {status:0,value:38,location:{province:"湖北",city:"武汉市",zone:"广州"}},
+        {status:0,value:38,location:{province:"湖北",city:"武汉市",zone:"延安"}},
+        {status:0,value:39,location:{province:"湖北",city:"武汉市",zone:"太原"}},
+        {status:0,value:39,location:{province:"湖北",city:"武汉市",zone:"清远"}},
+        {status:0,value:39,location:{province:"湖北",city:"武汉市",zone:"中山"}},
+        {status:0,value:39,location:{province:"湖北",city:"武汉市",zone:"昆明"}},
+        {status:0,value:40,location:{province:"湖北",city:"武汉市",zone:"寿光"}},
+        {status:0,value:40,location:{province:"湖北",city:"武汉市",zone:"盘锦"}},
+        {status:0,value:41,location:{province:"湖北",city:"武汉市",zone:"长治"}},
+        {status:0,value:41,location:{province:"湖北",city:"武汉市",zone:"深圳"}},
+        {status:0,value:42,location:{province:"湖北",city:"武汉市",zone:"珠海"}},
+        {status:0,value:43,location:{province:"湖北",city:"武汉市",zone:"宿迁"}},
+        {status:1,value:43,location:{province:"湖北",city:"武汉市",zone:"咸阳"}},
+        {status:0,value:44,location:{province:"湖北",city:"武汉市",zone:"铜川"}},
+        {status:0,value:44,location:{province:"湖北",city:"武汉市",zone:"平度"}},
+        {status:0,value:44,location:{province:"湖北",city:"武汉市",zone:"佛山"}},
+        {status:0,value:44,location:{province:"湖北",city:"武汉市",zone:"海口"}},
+        {status:0,value:45,location:{province:"湖北",city:"武汉市",zone:"江门"}},
+        {status:0,value:45,location:{province:"湖北",city:"武汉市",zone:"章丘"}},
+        {status:0,value:46,location:{province:"湖北",city:"武汉市",zone:"肇庆"}},
+        {status:2,value:47,location:{province:"湖北",city:"武汉市",zone:"大连"}},
+        {status:0,value:47,location:{province:"湖北",city:"武汉市",zone:"临汾"}},
+        {status:0,value:47,location:{province:"湖北",city:"武汉市",zone:"吴江"}},
+        {status:0,value:49,location:{province:"湖北",city:"武汉市",zone:"石嘴山"}},
+        {status:0,value:50,location:{province:"湖北",city:"武汉市",zone:"沈阳"}},
+        {status:0,value:50,location:{province:"湖北",city:"武汉市",zone:"苏州"}},
+        {status:0,value:50,location:{province:"湖北",city:"武汉市",zone:"茂名"}},
+        {status:0,value:51,location:{province:"湖北",city:"武汉市",zone:"嘉兴"}},
+        {status:0,value:51,location:{province:"湖北",city:"武汉市",zone:"长春"}},
+        {status:0,value:52,location:{province:"湖北",city:"武汉市",zone:"胶州"}},
+        {status:2,value:52,location:{province:"湖北",city:"武汉市",zone:"银川"}},
+        {status:0,value:52,location:{province:"湖北",city:"武汉市",zone:"张家港"}},
+        {status:0,value:53,location:{province:"湖北",city:"武汉市",zone:"三门峡"}},
+        {status:0,value:54,location:{province:"湖北",city:"武汉市",zone:"锦州"}},
+        {status:0,value:54,location:{province:"湖北",city:"武汉市",zone:"南昌"}},
+        {status:0,value:54,location:{province:"湖北",city:"武汉市",zone:"柳州"}},
+        {status:0,value:54,location:{province:"湖北",city:"武汉市",zone:"三亚"}},
+        {status:0,value:56,location:{province:"湖北",city:"武汉市",zone:"自贡"}},
+        {status:0,value:56,location:{province:"湖北",city:"武汉市",zone:"吉林"}},
+        {status:0,value:57,location:{province:"湖北",city:"武汉市",zone:"阳江"}},
+        {status:0,value:57,location:{province:"湖北",city:"武汉市",zone:"泸州"}},
+        {status:0,value:57,location:{province:"湖北",city:"武汉市",zone:"西宁"}},
+        {status:0,value:58,location:{province:"湖北",city:"武汉市",zone:"宜宾"}},
+        {status:0,value:58,location:{province:"湖北",city:"武汉市",zone:"呼和浩特"}},
+        {status:2,value:58,location:{province:"湖北",city:"武汉市",zone:"成都"}},
+        {status:0,value:58,location:{province:"湖北",city:"武汉市",zone:"大同"}},
+        {status:0,value:59,location:{province:"湖北",city:"武汉市",zone:"镇江"}},
+        {status:1,value:59,location:{province:"湖北",city:"武汉市",zone:"桂林"}},
+        {status:1,value:59,location:{province:"湖北",city:"武汉市",zone:"张家界"}},
+        {status:1,value:59,location:{province:"湖北",city:"武汉市",zone:"宜兴"}},
+        {status:0,value:60,location:{province:"湖北",city:"武汉市",zone:"北海"}},
+        {status:0,value:61,location:{province:"湖北",city:"武汉市",zone:"西安"}},
+        {status:0,value:62,location:{province:"湖北",city:"武汉市",zone:"金坛"}},
+        {status:0,value:62,location:{province:"湖北",city:"武汉市",zone:"东营"}},
+        {status:0,value:63,location:{province:"湖北",city:"武汉市",zone:"牡丹江"}},
+        {status:0,value:63,location:{province:"湖北",city:"武汉市",zone:"遵义"}},
+        {status:0,value:63,location:{province:"湖北",city:"武汉市",zone:"绍兴"}},
+        {status:0,value:64,location:{province:"湖北",city:"武汉市",zone:"扬州"}},
+        {status:0,value:64,location:{province:"湖北",city:"武汉市",zone:"常州"}},
+        {status:0,value:65,location:{province:"湖北",city:"武汉市",zone:"潍坊"}},
+        {status:0,value:66,location:{province:"湖北",city:"武汉市",zone:"重庆"}},
+        {status:0,value:67,location:{province:"湖北",city:"武汉市",zone:"台州"}},
+        {status:0,value:67,location:{province:"湖北",city:"武汉市",zone:"南京"}},
+        {status:0,value:70,location:{province:"湖北",city:"武汉市",zone:"滨州"}},
+        {status:0,value:71,location:{province:"湖北",city:"武汉市",zone:"贵阳"}},
+        {status:0,value:71,location:{province:"湖北",city:"武汉市",zone:"无锡"}},
+        {status:0,value:71,location:{province:"湖北",city:"武汉市",zone:"本溪"}},
+        {status:0,value:72,location:{province:"湖北",city:"武汉市",zone:"克拉玛依"}},
+        {status:0,value:72,location:{province:"湖北",city:"武汉市",zone:"渭南"}},
+        {status:0,value:72,location:{province:"湖北",city:"武汉市",zone:"马鞍山"}},
+        {status:0,value:72,location:{province:"湖北",city:"武汉市",zone:"宝鸡"}},
+        {status:0,value:75,location:{province:"湖北",city:"武汉市",zone:"焦作"}},
+        {status:0,value:75,location:{province:"湖北",city:"武汉市",zone:"句容"}},
+        {status:0,value:79,location:{province:"湖北",city:"武汉市",zone:"北京"}},
+        {status:0,value:79,location:{province:"湖北",city:"武汉市",zone:"徐州"}},
+        {status:0,value:80,location:{province:"湖北",city:"武汉市",zone:"衡水"}},
+        {status:0,value:80,location:{province:"湖北",city:"武汉市",zone:"包头"}},
+        {status:0,value:80,location:{province:"湖北",city:"武汉市",zone:"绵阳"}},
+        {status:1,value:84,location:{province:"湖北",city:"武汉市",zone:"乌鲁木齐"}},
+        {status:0,value:84,location:{province:"湖北",city:"武汉市",zone:"枣庄"}},
+        {status:0,value:84,location:{province:"湖北",city:"武汉市",zone:"杭州"}},
+        {status:0,value:85,location:{province:"湖北",city:"武汉市",zone:"淄博"}},
+        {status:0,value:86,location:{province:"湖北",city:"武汉市",zone:"鞍山"}},
+        {status:0,value:86,location:{province:"湖北",city:"武汉市",zone:"溧阳"}},
+        {status:0,value:86,location:{province:"湖北",city:"武汉市",zone:"库尔勒"}},
+        {status:0,value:90,location:{province:"湖北",city:"武汉市",zone:"安阳"}},
+        {status:0,value:90,location:{province:"湖北",city:"武汉市",zone:"开封"}},
+        {status:0,value:92,location:{province:"湖北",city:"武汉市",zone:"济南"}},
+        {status:0,value:93,location:{province:"湖北",city:"武汉市",zone:"德阳"}},
+        {status:0,value:95,location:{province:"湖北",city:"武汉市",zone:"温州"}},
+        {status:2,value:96,location:{province:"湖北",city:"武汉市",zone:"九江"}},
+        {status:0,value:98,location:{province:"湖北",city:"武汉市",zone:"邯郸"}},
+        {status:0,value:99,location:{province:"湖北",city:"武汉市",zone:"临安"}},
+        {status:0,value:99,location:{province:"湖北",city:"武汉市",zone:"兰州"}},
+        {status:0,value:100,location:{province:"湖北",city:"武汉市",zone:"沧州"}},
+        {status:1,value:103,location:{province:"湖北",city:"武汉市",zone:"临沂"}},
+        {status:1,value:104,location:{province:"湖北",city:"武汉市",zone:"南充"}},
+        {status:2,value:105,location:{province:"湖北",city:"武汉市",zone:"天津"}},
+        {status:0,value:106,location:{province:"湖北",city:"武汉市",zone:"富阳"}},
+        {status:0,value:112,location:{province:"湖北",city:"武汉市",zone:"泰安"}},
+        {status:1,value:112,location:{province:"湖北",city:"武汉市",zone:"诸暨"}},
+        {status:0,value:113,location:{province:"湖北",city:"武汉市",zone:"郑州"}},
+        {status:0,value:114,location:{province:"湖北",city:"武汉市",zone:"哈尔滨"}},
+        {status:2,value:116,location:{province:"湖北",city:"武汉市",zone:"聊城"}},
+        {status:1,value:117,location:{province:"湖北",city:"武汉市",zone:"芜湖"}},
+        {status:0,value:119,location:{province:"湖北",city:"武汉市",zone:"唐山"}},
+        {status:0,value:119,location:{province:"湖北",city:"武汉市",zone:"平顶山"}},
+        {status:0,value:119,location:{province:"湖北",city:"武汉市",zone:"邢台"}},
+        {status:0,value:120,location:{province:"湖北",city:"武汉市",zone:"德州"}},
+        {status:0,value:120,location:{province:"湖北",city:"武汉市",zone:"济宁"}},
+        {status:0,value:127,location:{province:"湖北",city:"武汉市",zone:"荆州"}},
+        {status:0,value:130,location:{province:"湖北",city:"武汉市",zone:"宜昌"}},
+        {status:0,value:132,location:{province:"湖北",city:"武汉市",zone:"义乌"}},
+        {status:0,value:133,location:{province:"湖北",city:"武汉市",zone:"丽水"}},
+        {status:0,value:134,location:{province:"湖北",city:"武汉市",zone:"洛阳"}},
+        {status:2,value:136,location:{province:"湖北",city:"武汉市",zone:"秦皇岛"}},
+        {status:2,value:143,location:{province:"湖北",city:"武汉市",zone:"株洲"}},
+        {status:2,value:147,location:{province:"湖北",city:"武汉市",zone:"石家庄"}},
+        {status:0,value:148,location:{province:"湖北",city:"武汉市",zone:"莱芜"}},
+        {status:0,value:152,location:{province:"湖北",city:"武汉市",zone:"常德"}},
+        {status:0,value:153,location:{province:"湖北",city:"武汉市",zone:"保定"}},
+        {status:0,value:154,location:{province:"湖北",city:"武汉市",zone:"湘潭"}},
+        {status:0,value:157,location:{province:"湖北",city:"武汉市",zone:"金华"}},
+        {status:1,value:169,location:{province:"湖北",city:"武汉市",zone:"岳阳"}},
+        {status:1,value:175,location:{province:"湖北",city:"武汉市",zone:"长沙"}},
+        {status:0,value:177,location:{province:"湖北",city:"武汉市",zone:"衢州"}},
+        {status:1,value:193,location:{province:"湖北",city:"武汉市",zone:"廊坊"}},
+        {status:0,value:194,location:{province:"湖北",city:"武汉市",zone:"菏泽"}},
+        {status:0,value:229,location:{province:"湖北",city:"武汉市",zone:"合肥"}},
+        {status:0,value:273,location:{province:"湖北",city:"武汉市",zone:"武汉"}},
+        {status:0,value:279,location:{province:"湖北",city:"武汉市",zone:"大庆"}}
+    ]
+
+    for (var i=0;i<data.length;i++){
+        /*(function (data,i) {
+            local.search(data[i].location.zone);
+            var result = local.getResults();
+            setTimeout(function () {
+                console.log(result);
+            },2000)
+        })(data,i);*/
+        local.search(data[i].location.zone);
+    }
+
+    for (var i=0;i<data.length;i++){
+        data[i].location = results[i];
+    }
+    /* var str = "";
+     for (var i=0;i<data.length;i++){
+
+     str += '{status:'+ data[i].status+',value:'+ data[i].value +',location:{provience:"'+ data[i].location.province +'",city:"'+ data[i].location.city +'",zone:"'+ data[i].name +'"}},</br>';
+     }
+     console.log(data);
+
+     document.getElementById('log').innerHTML = str;*/
+    console.dir(data)
+</script>
+</body>
+</html>

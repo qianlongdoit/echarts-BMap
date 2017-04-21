@@ -14,6 +14,8 @@
 <h1>bmp--scatter 百度地图demo</h1>
 <div id="container" style="width: 1200px;height: 600px"></div>
 
+<div id="log"></div>
+
 <script type="text/javascript">
     //百度地图API功能
     var map = new BMap.Map("container");
@@ -544,16 +546,40 @@
      })*/
 
     //地图搜索
-    var LocalSreachOptions = {
+    var LocalSearchOptions = {
         onSearchComplete:function (results) {
-            console.log(results);
+            console.log(results.province);
         }
     };
-    var oLocalSreach = new BMap.LocalSearch(data[0].name,LocalSreachOptions);
-    console.dir(oLocalSreach)
-    oLocalSreach.search(data[0].name);
-    var result = oLocalSreach.getResults();
+    var oLocalSearch = new BMap.LocalSearch(map,LocalSearchOptions);
+    console.log(oLocalSearch)
+    oLocalSearch.search(data[0].name);
+    var result = oLocalSearch.getResults();
     console.log(result)
+
+    /*var oLog = document.getElementById("log");
+    var str = "";
+    for (var attr in oLocalSearch){
+        str += attr + ": " + oLocalSearch[attr] + "</br></br>";
+    }
+    oLog.innerHTML = str;*/
+
+    //数据改造
+    function getProvince(city) {
+        var province = "";
+        //搜索
+        var LocalSearchOptions = {
+            onSearchComplete:function (results) {
+                province = results.province ;
+                console.log(province);
+            }
+        };
+        var oLocalSearch = new BMap.LocalSearch(city,LocalSearchOptions);
+        oLocalSearch.search(city);
+
+    }
+
+//    console.log(getProvince("仙桃"))
 </script>
 </body>
 </html>
