@@ -26,7 +26,21 @@
     icon.setSize({height:50,width:78})
     map.addOverlay(marker);
 
-
+    function write(a) {
+        var p = a.num,
+            n;
+        if (p){
+            n =  typeof p === "string"?p:p(a.data);
+        }
+        console.log(n);
+    }
+    write({
+        num:function (n) {
+            n++;
+            return n
+        },
+        data:0
+    });
 </script>
 </body>
 </html>

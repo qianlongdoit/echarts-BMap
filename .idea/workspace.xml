@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ba7fcee-f740-4d6e-9e69-f57e6ea25422" name="默认" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/bmap-demo/0.test.html" afterPath="$PROJECT_DIR$/demo/bmap-demo/0.test.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/bmap-demo/9.点聚合-省.html" afterPath="$PROJECT_DIR$/demo/bmap-demo/9.点聚合-省.html" />
     </list>
     <ignored path="echartJS.iws" />
@@ -60,17 +61,19 @@
       <file leaf-file-name="9.点聚合-省.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/demo/bmap-demo/9.点聚合-省.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="834" column="25" lean-forward="true" selection-start-line="834" selection-start-column="25" selection-end-line="834" selection-end-column="25" />
+            <state relative-caret-position="428">
+              <caret line="902" column="0" lean-forward="true" selection-start-line="902" selection-start-column="0" selection-end-line="902" selection-end-column="0" />
               <folding>
-                <element signature="e#1673#16266#0" expanded="false" />
-                <element signature="e#16272#24148#0" expanded="false" />
-                <element signature="e#24171#30201#0" expanded="false" />
-                <element signature="e#30226#31419#0" expanded="false" />
-                <element signature="e#33818#34448#0" expanded="false" />
-                <element signature="e#35014#35112#0" expanded="false" />
-                <element signature="e#36465#36733#0" expanded="false" />
-                <marker date="1493030442831" expanded="true" signature="32566:32573" ph="..." />
+                <element signature="e#1711#18204#0" expanded="false" />
+                <element signature="e#18210#26086#0" expanded="false" />
+                <element signature="e#26109#32139#0" expanded="false" />
+                <element signature="e#32164#33419#0" expanded="false" />
+                <element signature="e#35840#36470#0" expanded="false" />
+                <element signature="e#37041#37139#0" expanded="false" />
+                <element signature="e#37193#38085#0" expanded="false" />
+                <element signature="e#38519#38787#0" expanded="false" />
+                <element signature="e#38900#40920#0" expanded="false" />
+                <marker date="1493034560329" expanded="true" signature="34577:34584" ph="..." />
               </folding>
             </state>
           </provider>
@@ -79,8 +82,8 @@
       <file leaf-file-name="0.test.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/demo/bmap-demo/0.test.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="393">
-              <caret line="23" column="21" lean-forward="true" selection-start-line="23" selection-start-column="21" selection-end-line="25" selection-end-column="38" />
+            <state relative-caret-position="327">
+              <caret line="32" column="35" lean-forward="true" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -141,6 +144,8 @@
       <find>option</find>
       <find>options.markerOption</find>
       <find>\boption\b</find>
+      <find>title</find>
+      <find>\btitle\b</find>
     </findStrings>
     <replaceStrings>
       <replace>6</replace>
@@ -209,8 +214,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="387" />
-    <option name="y" value="94" />
+    <option name="x" value="389" />
+    <option name="y" value="49" />
     <option name="width" value="1459" />
     <option name="height" value="876" />
   </component>
@@ -423,15 +428,15 @@
       <workItem from="1492603889347" duration="1195000" />
       <workItem from="1492648725419" duration="30511000" />
       <workItem from="1492734924311" duration="25951000" />
-      <workItem from="1492994431580" duration="22301000" />
+      <workItem from="1492994431580" duration="26116000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="190851000" />
+    <option name="totallyTimeSpent" value="194666000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="387" y="94" width="1459" height="876" extended-state="0" />
+    <frame x="389" y="49" width="1459" height="876" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15314044" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -863,25 +868,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/demo/bmap-demo/0.test.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="23" column="21" lean-forward="true" selection-start-line="23" selection-start-column="21" selection-end-line="25" selection-end-column="38" />
+        <state relative-caret-position="327">
+          <caret line="32" column="35" lean-forward="true" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/demo/bmap-demo/9.点聚合-省.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="834" column="25" lean-forward="true" selection-start-line="834" selection-start-column="25" selection-end-line="834" selection-end-column="25" />
+        <state relative-caret-position="428">
+          <caret line="902" column="0" lean-forward="true" selection-start-line="902" selection-start-column="0" selection-end-line="902" selection-end-column="0" />
           <folding>
-            <element signature="e#1673#16266#0" expanded="false" />
-            <element signature="e#16272#24148#0" expanded="false" />
-            <element signature="e#24171#30201#0" expanded="false" />
-            <element signature="e#30226#31419#0" expanded="false" />
-            <element signature="e#33818#34448#0" expanded="false" />
-            <element signature="e#35014#35112#0" expanded="false" />
-            <element signature="e#36465#36733#0" expanded="false" />
-            <marker date="1493030442831" expanded="true" signature="32566:32573" ph="..." />
+            <element signature="e#1711#18204#0" expanded="false" />
+            <element signature="e#18210#26086#0" expanded="false" />
+            <element signature="e#26109#32139#0" expanded="false" />
+            <element signature="e#32164#33419#0" expanded="false" />
+            <element signature="e#35840#36470#0" expanded="false" />
+            <element signature="e#37041#37139#0" expanded="false" />
+            <element signature="e#37193#38085#0" expanded="false" />
+            <element signature="e#38519#38787#0" expanded="false" />
+            <element signature="e#38900#40920#0" expanded="false" />
+            <marker date="1493034560329" expanded="true" signature="34577:34584" ph="..." />
           </folding>
         </state>
       </provider>
