@@ -4,8 +4,6 @@
     <list default="true" id="9ba7fcee-f740-4d6e-9e69-f57e6ea25422" name="默认" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/bmap-demo/9.点聚合-省.html" afterPath="$PROJECT_DIR$/demo/bmap-demo/9.点聚合-省.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/bmap-demo/data.html" afterPath="$PROJECT_DIR$/demo/bmap-demo/data.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/demo/bmap-demo/9-2.点聚合-省数据准备.html" afterPath="$PROJECT_DIR$/demo/bmap-demo/9-2.点聚合-省-数据准备.html" />
     </list>
     <ignored path="echartJS.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,11 +26,12 @@
       <file leaf-file-name="2-bmap-scatter.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/demo/bmp-echarts/2-bmap-scatter.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="485" column="29" lean-forward="false" selection-start-line="485" selection-start-column="29" selection-end-line="485" selection-end-column="29" />
+            <state relative-caret-position="701">
+              <caret line="417" column="13" lean-forward="false" selection-start-line="417" selection-start-column="13" selection-end-line="417" selection-end-column="13" />
               <folding>
                 <element signature="e#651#9080#0" expanded="false" />
                 <element signature="e#9104#15134#0" expanded="false" />
+                <element signature="e#15568#23180#0" expanded="false" />
                 <element signature="e#16020#16717#0" expanded="false" />
                 <element signature="e#18391#21775#0" expanded="false" />
                 <element signature="e#21795#22314#0" expanded="false" />
@@ -42,26 +41,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="5.点聚合.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/demo/bmap-demo/5.点聚合.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-440">
-              <caret line="16" column="30" lean-forward="false" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
-              <folding>
-                <element signature="e#1651#10080#0" expanded="false" />
-                <element signature="e#10104#16134#0" expanded="false" />
-                <element signature="e#18002#18304#0" expanded="false" />
-                <marker date="1492588900557" expanded="true" signature="17193:17200" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="7.缩放监听.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/demo/bmap-demo/7.缩放监听.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="525">
-              <caret line="546" column="7" lean-forward="true" selection-start-line="546" selection-start-column="7" selection-end-line="546" selection-end-column="7" />
+              <caret line="546" column="7" lean-forward="false" selection-start-line="546" selection-start-column="7" selection-end-line="546" selection-end-column="7" />
               <folding>
                 <element signature="e#1651#10080#0" expanded="false" />
                 <element signature="e#10104#16134#0" expanded="false" />
@@ -74,35 +58,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="4.点-分类标记.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/demo/bmap-demo/4.点-分类标记.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-913">
-              <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-              <folding>
-                <element signature="e#1389#9818#0" expanded="false" />
-                <element signature="e#9842#15872#0" expanded="false" />
-                <marker date="1492584745216" expanded="true" signature="16904:16911" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="9.点聚合-省.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/demo/bmap-demo/9.点聚合-省.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="855">
-              <caret line="831" column="47" lean-forward="false" selection-start-line="831" selection-start-column="47" selection-end-line="831" selection-end-column="47" />
+            <state relative-caret-position="-575">
+              <caret line="689" column="46" lean-forward="false" selection-start-line="689" selection-start-column="46" selection-end-line="689" selection-end-column="46" />
               <folding>
                 <element signature="e#1673#16266#0" expanded="false" />
                 <element signature="e#16272#24148#0" expanded="false" />
                 <element signature="e#24171#30201#0" expanded="false" />
                 <element signature="e#30226#31419#0" expanded="false" />
-                <element signature="e#33342#33644#0" expanded="false" />
-                <element signature="e#34192#34822#0" expanded="false" />
-                <element signature="e#35463#35562#0" expanded="false" />
-                <marker date="1492766499490" expanded="true" signature="32533:32540" ph="..." />
+                <element signature="e#33818#34448#0" expanded="false" />
+                <element signature="e#35014#35112#0" expanded="false" />
+                <element signature="e#36463#36731#0" expanded="false" />
+                <marker date="1493022031260" expanded="true" signature="32566:32573" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="0.test.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/demo/bmap-demo/0.test.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="393">
+              <caret line="23" column="21" lean-forward="true" selection-start-line="23" selection-start-column="21" selection-end-line="25" selection-end-column="38" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -110,8 +90,8 @@
       <file leaf-file-name="data.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/demo/bmap-demo/data.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="99">
-              <caret line="848" column="6" lean-forward="true" selection-start-line="816" selection-start-column="4" selection-end-line="848" selection-end-column="6" />
+            <state relative-caret-position="429">
+              <caret line="848" column="6" lean-forward="false" selection-start-line="816" selection-start-column="4" selection-end-line="848" selection-end-column="6" />
               <folding>
                 <element signature="e#517#8946#0" expanded="false" />
                 <element signature="e#8970#15000#0" expanded="false" />
@@ -120,47 +100,6 @@
                 <element signature="e#15770#30140#0" expanded="false" />
                 <element signature="e#30153#44746#0" expanded="false" />
                 <element signature="e#44772#45965#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="9-2.点聚合-省-数据准备.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/demo/bmap-demo/9-2.点聚合-省-数据准备.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="796" column="6" lean-forward="false" selection-start-line="796" selection-start-column="4" selection-end-line="806" selection-end-column="53" />
-              <folding>
-                <element signature="e#1673#16266#0" expanded="false" />
-                <element signature="e#16272#24148#0" expanded="false" />
-                <element signature="e#24171#30201#0" expanded="false" />
-                <marker date="1492762828341" expanded="true" signature="31314:31321" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="8-2.地图检索.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/demo/bmap-demo/8-2.地图检索.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-399">
-              <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="37" selection-end-column="10" />
-              <folding>
-                <element signature="e#2445#16764#0" expanded="false" />
-                <element signature="e#16770#17205#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="3.给多个点添加信息窗口.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/demo/bmap-demo/3.给多个点添加信息窗口.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="660">
-              <caret line="39" column="22" lean-forward="false" selection-start-line="39" selection-start-column="22" selection-end-line="39" selection-end-column="22" />
-              <folding>
-                <element signature="e#1160#1448#0" expanded="false" />
-                <element signature="e#1497#7527#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -198,6 +137,7 @@
       <find>point</find>
       <find>count</find>
       <find>local</find>
+      <find>geoCoord</find>
       <find>option</find>
     </findStrings>
     <replaceStrings>
@@ -254,6 +194,7 @@
         <option value="$PROJECT_DIR$/demo/bmap-demo/8-2.地图检索.html" />
         <option value="$PROJECT_DIR$/demo/bmap-demo/9-2.点聚合-省数据准备.html" />
         <option value="$PROJECT_DIR$/demo/bmap-demo/data.html" />
+        <option value="$PROJECT_DIR$/demo/bmap-demo/0.test.html" />
         <option value="$PROJECT_DIR$/demo/bmap-demo/9.点聚合-省.html" />
       </list>
     </option>
@@ -265,8 +206,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="364" />
-    <option name="y" value="101" />
+    <option name="x" value="561" />
+    <option name="y" value="61" />
     <option name="width" value="1459" />
     <option name="height" value="876" />
   </component>
@@ -328,18 +269,36 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="bmp-echarts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="echartJS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="echartJS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="bmap-demo" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
     <property name="last_opened_file_path" value="F:/gasanalyzer" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
@@ -347,14 +306,14 @@
     <property name="js-jscs-nodeInterpreter" value="D:\NODE\node.exe" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="F:\framework\echartJS\demo\bmp-echarts" />
-      <recent name="F:\framework\echartJS\demo" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\framework\echartJS\demo\bmap-demo" />
       <recent name="F:\framework\echartJS\demo" />
       <recent name="F:\framework\echartJS" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\framework\echartJS\demo\bmp-echarts" />
+      <recent name="F:\framework\echartJS\demo" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -460,15 +419,16 @@
       <workItem from="1492561972770" duration="24288000" />
       <workItem from="1492603889347" duration="1195000" />
       <workItem from="1492648725419" duration="30511000" />
-      <workItem from="1492734924311" duration="25433000" />
+      <workItem from="1492734924311" duration="25951000" />
+      <workItem from="1492994431580" duration="15955000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="168032000" />
+    <option name="totallyTimeSpent" value="184505000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="364" y="101" width="1459" height="876" extended-state="0" />
+    <frame x="561" y="61" width="1459" height="876" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15314044" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -523,20 +483,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/demo/scatter-geo-visualMap.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12760">
-          <caret line="580" column="0" lean-forward="true" selection-start-line="580" selection-start-column="0" selection-end-line="580" selection-end-column="0" />
-          <folding>
-            <element signature="e#357#6007#0" expanded="false" />
-            <element signature="e#6064#14493#0" expanded="false" />
-            <element signature="e#14889#19699#0" expanded="false" />
-            <element signature="e#15347#16043#0" expanded="false" />
-            <marker date="1492476016842" expanded="true" signature="16450:16457" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/demo/折线图3.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
@@ -688,13 +634,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/demo/doc-example-scatter-visualMap-piecewise.html" />
-    <entry file="file://$PROJECT_DIR$/demo/worldMap1.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="9" column="30" lean-forward="false" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/demo/折线图3.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -732,20 +671,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1188">
           <caret line="575" column="35" lean-forward="false" selection-start-line="575" selection-start-column="35" selection-end-line="575" selection-end-column="35" />
-          <folding>
-            <element signature="e#357#6007#0" expanded="false" />
-            <element signature="e#6064#14493#0" expanded="false" />
-            <element signature="e#14889#19699#0" expanded="false" />
-            <element signature="e#15347#16043#0" expanded="false" />
-            <marker date="1492476016842" expanded="true" signature="16450:16457" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/demo/bmap-demo/1.自定义覆盖物.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="24" column="72" lean-forward="false" selection-start-line="24" selection-start-column="72" selection-end-line="24" selection-end-column="72" />
         </state>
       </provider>
     </entry>
@@ -753,28 +678,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="990">
           <caret line="193" column="4" lean-forward="false" selection-start-line="193" selection-start-column="4" selection-end-line="193" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/demo/bmap-demo/2.加载海量点.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1100">
-          <caret line="250" column="36" lean-forward="false" selection-start-line="250" selection-start-column="36" selection-end-line="250" selection-end-column="36" />
-          <folding>
-            <element signature="e#1139#1427#0" expanded="false" />
-            <element signature="e#1463#7493#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/demo/bmap-demo/3.给多个点添加信息窗口.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="39" column="22" lean-forward="false" selection-start-line="39" selection-start-column="22" selection-end-line="39" selection-end-column="22" />
-          <folding>
-            <element signature="e#1160#1448#0" expanded="false" />
-            <element signature="e#1497#7527#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -788,14 +691,6 @@
             <element signature="e#18002#18304#0" expanded="false" />
             <marker date="1492604395616" expanded="true" signature="17193:17200" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/demo/bmap-demo/点聚合源码.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1589">
-          <caret line="619" column="7" lean-forward="false" selection-start-line="619" selection-start-column="7" selection-end-line="619" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -815,10 +710,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/demo/bmap-demo/9-2.点聚合-省-数据准备.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="796" column="6" lean-forward="false" selection-start-line="796" selection-start-column="4" selection-end-line="806" selection-end-column="53" />
+          <folding>
+            <element signature="e#1673#16266#0" expanded="false" />
+            <element signature="e#16272#24148#0" expanded="false" />
+            <element signature="e#24171#30201#0" expanded="false" />
+            <marker date="1492762828341" expanded="true" signature="31314:31321" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo/bmap-demo/点聚合源码.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13090">
+          <caret line="619" column="7" lean-forward="false" selection-start-line="619" selection-start-column="7" selection-end-line="619" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo/bmap-demo/4.点-分类标记.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-531">
+          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding>
+            <element signature="e#1389#9818#0" expanded="false" />
+            <element signature="e#9842#15872#0" expanded="false" />
+            <marker date="1492584745216" expanded="true" signature="16904:16911" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/demo/bmap-demo/7.缩放监听.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="525">
-          <caret line="546" column="7" lean-forward="true" selection-start-line="546" selection-start-column="7" selection-end-line="546" selection-end-column="7" />
+          <caret line="546" column="7" lean-forward="false" selection-start-line="546" selection-start-column="7" selection-end-line="546" selection-end-column="7" />
           <folding>
             <element signature="e#1651#10080#0" expanded="false" />
             <element signature="e#10104#16134#0" expanded="false" />
@@ -830,15 +758,75 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/demo/bmap-demo/3.给多个点添加信息窗口.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-333">
+          <caret line="39" column="22" lean-forward="false" selection-start-line="39" selection-start-column="22" selection-end-line="39" selection-end-column="22" />
+          <folding>
+            <element signature="e#1160#1448#0" expanded="false" />
+            <element signature="e#1497#7527#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo/worldMap1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-121">
+          <caret line="9" column="30" lean-forward="false" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
+          <folding>
+            <element signature="e#353#1257#0" expanded="false" />
+            <element signature="e#1282#6932#0" expanded="false" />
+            <element signature="e#6967#7413#0" expanded="false" />
+            <element signature="e#7680#13604#0" expanded="false" />
+            <marker date="1492417520600" expanded="true" signature="8040:8050" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/demo/bmap-demo/5.点聚合.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-440">
+        <state relative-caret-position="-1100">
           <caret line="16" column="30" lean-forward="false" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
           <folding>
             <element signature="e#1651#10080#0" expanded="false" />
             <element signature="e#10104#16134#0" expanded="false" />
             <element signature="e#18002#18304#0" expanded="false" />
             <marker date="1492588900557" expanded="true" signature="17193:17200" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo/bmap-demo/2.加载海量点.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="394">
+          <caret line="250" column="36" lean-forward="false" selection-start-line="250" selection-start-column="36" selection-end-line="250" selection-end-column="36" />
+          <folding>
+            <element signature="e#1139#1427#0" expanded="false" />
+            <element signature="e#1463#7493#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo/bmap-demo/1.自定义覆盖物.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="24" column="72" lean-forward="false" selection-start-line="24" selection-start-column="72" selection-end-line="24" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo/bmp-echarts/2-bmap-scatter.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="701">
+          <caret line="417" column="13" lean-forward="false" selection-start-line="417" selection-start-column="13" selection-end-line="417" selection-end-column="13" />
+          <folding>
+            <element signature="e#651#9080#0" expanded="false" />
+            <element signature="e#9104#15134#0" expanded="false" />
+            <element signature="e#15568#23180#0" expanded="false" />
+            <element signature="e#16020#16717#0" expanded="false" />
+            <element signature="e#18391#21775#0" expanded="false" />
+            <element signature="e#21795#22314#0" expanded="false" />
+            <marker date="1492509749836" expanded="true" signature="17118:17125" ph="..." />
           </folding>
         </state>
       </provider>
@@ -854,25 +842,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/demo/bmp-echarts/2-bmap-scatter.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="485" column="29" lean-forward="false" selection-start-line="485" selection-start-column="29" selection-end-line="485" selection-end-column="29" />
-          <folding>
-            <element signature="e#651#9080#0" expanded="false" />
-            <element signature="e#9104#15134#0" expanded="false" />
-            <element signature="e#16020#16717#0" expanded="false" />
-            <element signature="e#18391#21775#0" expanded="false" />
-            <element signature="e#21795#22314#0" expanded="false" />
-            <marker date="1492509749836" expanded="true" signature="17118:17125" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/demo/bmap-demo/data.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="848" column="6" lean-forward="true" selection-start-line="816" selection-start-column="4" selection-end-line="848" selection-end-column="6" />
+        <state relative-caret-position="429">
+          <caret line="848" column="6" lean-forward="false" selection-start-line="816" selection-start-column="4" selection-end-line="848" selection-end-column="6" />
           <folding>
             <element signature="e#517#8946#0" expanded="false" />
             <element signature="e#8970#15000#0" expanded="false" />
@@ -885,44 +858,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/demo/bmap-demo/9-2.点聚合-省-数据准备.html">
+    <entry file="file://$PROJECT_DIR$/demo/bmap-demo/0.test.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="796" column="6" lean-forward="false" selection-start-line="796" selection-start-column="4" selection-end-line="806" selection-end-column="53" />
-          <folding>
-            <element signature="e#1673#16266#0" expanded="false" />
-            <element signature="e#16272#24148#0" expanded="false" />
-            <element signature="e#24171#30201#0" expanded="false" />
-            <marker date="1492762828341" expanded="true" signature="31314:31321" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/demo/bmap-demo/4.点-分类标记.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-913">
-          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding>
-            <element signature="e#1389#9818#0" expanded="false" />
-            <element signature="e#9842#15872#0" expanded="false" />
-            <marker date="1492584745216" expanded="true" signature="16904:16911" ph="..." />
-          </folding>
+        <state relative-caret-position="393">
+          <caret line="23" column="21" lean-forward="true" selection-start-line="23" selection-start-column="21" selection-end-line="25" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/demo/bmap-demo/9.点聚合-省.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="831" column="47" lean-forward="false" selection-start-line="831" selection-start-column="47" selection-end-line="831" selection-end-column="47" />
+        <state relative-caret-position="-575">
+          <caret line="689" column="46" lean-forward="false" selection-start-line="689" selection-start-column="46" selection-end-line="689" selection-end-column="46" />
           <folding>
             <element signature="e#1673#16266#0" expanded="false" />
             <element signature="e#16272#24148#0" expanded="false" />
             <element signature="e#24171#30201#0" expanded="false" />
             <element signature="e#30226#31419#0" expanded="false" />
-            <element signature="e#33342#33644#0" expanded="false" />
-            <element signature="e#34192#34822#0" expanded="false" />
-            <element signature="e#35463#35562#0" expanded="false" />
-            <marker date="1492766499490" expanded="true" signature="32533:32540" ph="..." />
+            <element signature="e#33818#34448#0" expanded="false" />
+            <element signature="e#35014#35112#0" expanded="false" />
+            <element signature="e#36463#36731#0" expanded="false" />
+            <marker date="1493022031260" expanded="true" signature="32566:32573" ph="..." />
           </folding>
         </state>
       </provider>

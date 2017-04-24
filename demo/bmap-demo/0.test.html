@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta charset="utf-8">
+    <script src="../../jquery-3.1.1.js"></script>
+    <!--<script src="../../echarts.js"></script>-->
+    <!--<script src="../../bmap.js"></script>-->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=nTsNCxWYUDe9RK7aiNlzneDe42NKG1Sq"></script>
+</head>
+<body style="height: 100%; margin: 0">
+
+<h1>echarts--scatter 世界地图</h1>
+<div id="container" style="width: 1200px;height: 600px"></div>
+
+<script type="text/javascript">
+    //百度地图API功能
+    var map = new BMap.Map("container");
+    var point = new BMap.Point(116.404, 39.915);
+    map.centerAndZoom(point, 15);       //指定地图初始中心点和缩放比例
+
+    var pt = new BMap.Point(116.417, 39.909);
+    var marker = new BMap.Marker(pt);
+    var icon = marker.getIcon();
+    console.log(icon)
+    icon.setImageSize({height:50,width:78})
+    icon.setSize({height:50,width:78})
+    map.addOverlay(marker);
+
+
+</script>
+</body>
+</html>

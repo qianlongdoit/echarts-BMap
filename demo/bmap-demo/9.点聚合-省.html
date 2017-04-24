@@ -662,6 +662,7 @@
         return res;
     }
     var points = convertData(data);      //海量点的坐标
+    console.dir(points)
 
     //2.添加信息窗口的配置选项
     var options = {
@@ -683,10 +684,10 @@
             var point = new BMap.Point(geoCoord[0], geoCoord[1]);
             //添加数据的信息；   并对数据分类处理
             var color = schema[points[i].status] === '数据异常' ? "red" : "green";
-            var content = points[i].name + '有<b> ' + points[i].value + ' </b>台设备，状态为<span style="color: ' + color + '">' + schema[points[i].status] + '</span>';
+            var content = points[i].location.zone + '有<b> ' + points[i].value + ' </b>台设备，状态为<span style="color: ' + color + '">' + schema[points[i].status] + '</span>';
 
             var option = {
-                title: points[i].name + "有" + points[i].value + "台设备，状态" + schema[points[i].status]
+                title: points[i].location.zone + "有" + points[i].value + "台设备，状态" + schema[points[i].status]
             };
             if (schema[points[i].status] === '数据异常'){
                 option.icon = warning;
@@ -704,18 +705,6 @@
             addClickHandler(content,marker);
         }
 
-//        var markerClusterer = new BMapLib.MarkerClusterer(map, {markers:markers});
-
-        //给点聚合添加样式
-        /*markerClusterer.setStyles([
-            {
-                url:'../warning.gif',  //图标路径
-                size: new BMap.Size(25, 25),  //图标大小
-                imageSize: {width: 25, height: 25},
-                textColor: '#fff',  //文字颜色
-                textSize: 14  //字体大小
-            }
-        ]);*/
 
         function addClickHandler(content,marker) {
             marker.addEventListener('click',function (e) {
@@ -765,11 +754,7 @@
         var sites = [];
         for (var i = 0; i < data.length; i++) {
             var p = data[i].location.province;
-            if (!count[ p ]) {
-                count[ p ] = 1;
-            }else{
-                count[ p ]++;
-            }
+            !count[p] ? count[p] = 1 : count[p]++;
         }
 
         for (var attr in count){
@@ -781,7 +766,7 @@
         }
 //            console.dir(sites);
         return sites;
-        /*count = {
+        /*site = {
          geoCoord: [lang,lat],
          location: "江苏省",
          num: 24
@@ -790,46 +775,110 @@
 
 
     function addGatherMarker(points,option) {
-        console.log("execute")
         for (var i=0;i<points.length;i++){
 //            创建标注点
             var geoCoord = points[i].geoCoord;
             var point = new BMap.Point(geoCoord[0],geoCoord[1]);
             var marker = new BMap.Marker(point);
+            //给marker注册事件
+            marker.addEventListener("click",function () {
+                map.zoomIn()
+            });
+            //将聚合的标注点放大
+            var icon = marker.getIcon();
+            icon.setImageSize({height:38,width:59})
+            icon.setSize({height:38,width:59})
             map.addOverlay(marker);
 //            创建标注本文
             var content = points[i].location + "有" + points[i].num + "个站点";
             var label = new BMap.Label(content,option);
+            label.setStyle({
+                background:"#b4b4b4",
+                border:"none"
+            });
             marker.setLabel(label);
         }
     }
 
     var gatherPoints = getSiteNum(data);
     var gatherOption = {
-        offset:new BMap.Size(20,-10)
+        offset:new BMap.Size(20,-10),
+        position:[]
     };
 
 //    addGatherMarker(gatherPoints,gatherOption);
 
     //添加缩放事件监听
     map.addEventListener('zoomend',function (e) {
-        console.log(map.getZoom());
-        var markers = addPoint(points, options);
-        if ( map.getZoom() <= 8 ){
-            map.clearOverlays();
-//            添加省聚集点
-            addGatherMarker(gatherPoints,gatherOption);
+//        console.log(map.getZoom())
+        map.clearOverlays();
+        map.getZoom() <= 7 ? addGatherMarker(gatherPoints, gatherOption) : addPoint(points, options);
+        /*if ( map.getZoom() <= 8 ){
+         map.clearOverlays();
+         //            添加省聚集点
+         addGatherMarker(gatherPoints,gatherOption);
 
-            console.log("clear?")
-        }else{
-            map.clearOverlays();
-            addPoint(points, options);
-//            markers.show();
-        }
-//
+         console.log("clear?")
+         }else{
+         map.clearOverlays();
+         addPoint(points, options);
+         }*/
     });
 
     addGatherMarker(gatherPoints,gatherOption);
+
+    function addMarker(option) {
+        //地图：实例化的一个地图或者是地图容器的id
+        var map = typeof option.map === "string" ? new BMap.Map(option.map) : option.map;
+        var geoCoord = option.geoCoord;
+        var point = new BMap.Point(geoCoord[0],geoCoord[1]);
+        //图像标记点的配置项
+        var markerOption = option.markerOption;
+        markerOption.title = typeof markerOption.title === "string" ? markerOption.title : markerOption.title(option.data);
+        var marker = new BMap.Marker(point, option.markerOption);
+
+        //添加标注文本
+        var content = option.labelOption.content;
+        var label = new BMap.Label(content, lOption);
+        label.setStyle(option.labelOption.setStyle);
+
+        //点添加到地图中
+        map.addOverlay(marker);
+    }
+
+    var commonOption = {
+        map:map,                                        //实例化的一个地图或者是地图容器的id
+        geoCoord:[112.569095,37.87976],                 //标记点的坐标[经度，纬度]
+        data:{},                                        //传入的数据
+        //覆盖物的样式
+        markerOption:{
+            title:"",
+            icon:{
+
+            }
+        },
+
+        //覆盖物标签的样式
+        labelOption:{
+            content:'',
+            offset:new BMap.Size(20,-10),               //设置标签的偏移量
+            position:new BMap.Point(),                  //此参数根据API文档设置后无反应，有待验证此参数
+            setStyle:{                                  //设置标签的样式，可以把标签当做一个span元素，即改变span的样式
+                color:"#000",
+                border:"red",
+                background:"#b4b4b4"
+            }
+        },
+
+        //信息窗的设置
+        infoWindowOptions:{
+            width: 0,                    //信息宽度
+            height: 0,                   //信息高度
+            offset:{width:0,height:-20},
+            title: "信息窗口",            //信息窗口标题
+            enableMessage: true          //是否允许信息窗发送短息
+        }
+    };
 
 </script>
 </body>
