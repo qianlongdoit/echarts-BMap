@@ -786,8 +786,8 @@
             });
             //将聚合的标注点放大
             var icon = marker.getIcon();
-            icon.setImageSize({height:38,width:59})
-            icon.setSize({height:38,width:59})
+            icon.setImageSize({height:38,width:59});
+            icon.setSize({height:38,width:59});
             map.addOverlay(marker);
 //            创建标注本文
             var content = points[i].location + "有" + points[i].num + "个站点";
@@ -827,20 +827,36 @@
 
     addGatherMarker(gatherPoints,gatherOption);
 
-    function addMarker(option) {
+//    为添加点 封装统一的函数
+    function addMarker(param) {
         //地图：实例化的一个地图或者是地图容器的id
-        var map = typeof option.map === "string" ? new BMap.Map(option.map) : option.map;
-        var geoCoord = option.geoCoord;
-        var point = new BMap.Point(geoCoord[0],geoCoord[1]);
-        //图像标记点的配置项
-        var markerOption = option.markerOption;
-        markerOption.title = typeof markerOption.title === "string" ? markerOption.title : markerOption.title(option.data);
-        var marker = new BMap.Marker(point, option.markerOption);
+        var map = typeof param.map === "string" ? new BMap.Map(param.map) : param.map;
+        var point = new BMap.Point(param.geoCoord[0],param.geoCoord[1]);
+        var options = {};
+        //marker的配置项
+//        鼠标移入时的提示框内容:string或者function,function要return一个字符串
+        if (param.markerOption.title){
+            var p = param.markerOption;
+            options.markerOption.title = typeof p.title === "string" ? p.title : p.title(param.data);
+        }
+
+//        marker的图标
+        if (param.markerOption.icon){
+            var icon = param.markerOption.icon;
+            markerOption.icon = icon instanceof BMap.Symbol ? icon : icon(param.data);
+        }
+//      添加覆盖物
+        var marker = new BMap.Marker(point, options.markerOption);
 
         //添加标注文本
-        var content = option.labelOption.content;
+        if (param.labelOption.content){
+            options.labelOption.content = param.labelOption.content;
+            var content = param.labelOption.content;
+        }
+
         var label = new BMap.Label(content, lOption);
-        label.setStyle(option.labelOption.setStyle);
+//        对label的样式进行设置
+        label.setStyle(param.labelOption.setStyle);
 
         //点添加到地图中
         map.addOverlay(marker);
