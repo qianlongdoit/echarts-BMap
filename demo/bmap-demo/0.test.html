@@ -41,6 +41,28 @@
         },
         data:0
     });
+
+    if (false){
+        var b =0;
+    }
+    console.log(b)          // b -> undefinded
+
+    var obj = {
+        a:{
+            b:function (num) {
+                num++;
+                return num;
+            }
+        },
+        num:0
+    };
+    var b = {
+        c:0,
+        a:1
+    };
+    var c = $.extend(true,b, obj);
+    obj.a = "changed";
+    console.log(c)
 </script>
 </body>
 </html>

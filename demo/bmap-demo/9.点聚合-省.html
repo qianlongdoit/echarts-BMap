@@ -834,18 +834,36 @@
     function addMarker(param) {
         //地图：实例化的一个地图或者是地图容器的id
         var map = typeof param.map === "string" ? new BMap.Map(param.map) : param.map;
-        var point = new BMap.Point(param.geoCoord[0], param.geoCoord[1]);
         //marker的配置项
-        var options = {};
+        var options = {
+            markerOption:{},
+            labelOption:{},
+            infoWindowOptions:{}
+        };
+//        增加对单个点和多个点的判断
+        if (typeof param.geoCoord[0] === "number"){
+            options.geoCoord = [ [param.geoCoord[0], param.geoCoord[1]] ];
+            options.data = [param.data];
+        }else{
+            options.geoCoord = [].concat(param.geoCoord);
+            options.data = $.extend(true,{},param.data);
+        }
+
+        var geoLength = options.geoCoord.length;
+        for (var i=0;i<geoLength;i++){
+
+        }
+
+        var point = new BMap.Point(param.geoCoord[0], param.geoCoord[1]);
 //        鼠标移入时的提示框内容:string或者function,function要return一个字符串
-        var p = param.markerOption;
-        if (p.title) {
-//            options.markerOption.title = typeof p.title === "string" ? p.title : p.title(param.data);
+        if (param.markerOption.title) {
+            var p = param.markerOption;
+            options.markerOption.title = typeof p.title === "string" ? p.title : p.title(param.data);
         }
 
 //        marker的图标
-        var icon = param.markerOption.icon;
-        if (icon) {
+        if (param.markerOption.icon) {
+            var icon = param.markerOption.icon;
             options.markerOption.icon = icon instanceof BMap.Symbol ? icon : icon(param.data);
         }
 //      添加覆盖物
@@ -862,8 +880,8 @@
         }
 
         //添加infoWindow
-        var iOption = param.infoWindowOptions;
-        if (iOption.content){
+        if (param.infoWindowOptions.content){
+            var iOption = param.infoWindowOptions;
             options.infoWindowOptions = {
                 width: 0 | iOption.width,                    //信息宽度
                 height: 0 | iOption.height,                   //信息高度
