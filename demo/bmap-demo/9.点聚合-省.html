@@ -665,7 +665,7 @@
         return res;
     }
     var points = convertData(data);      //海量点的坐标
-    console.dir(points)
+//    console.dir(points)
 
     //2.添加信息窗口的配置选项
     var options = {
@@ -828,7 +828,7 @@
          }*/
     });
 
-    addGatherMarker(gatherPoints, gatherOption);
+//    addGatherMarker(gatherPoints, gatherOption);
 
     //    为添加点 封装统一的函数
     function addMarker(param) {
@@ -840,7 +840,7 @@
 //        鼠标移入时的提示框内容:string或者function,function要return一个字符串
         var p = param.markerOption;
         if (p.title) {
-            options.markerOption.title = typeof p.title === "string" ? p.title : p.title(param.data);
+//            options.markerOption.title = typeof p.title === "string" ? p.title : p.title(param.data);
         }
 
 //        marker的图标
@@ -862,17 +862,19 @@
         }
 
         //添加infoWindow
-        var title = param.infoWindowOptions.title;
-        if (title){
+        var iOption = param.infoWindowOptions;
+        if (iOption.content){
             options.infoWindowOptions = {
-                width: 0 | param.infoWindowOptions.width,                    //信息宽度
-                height: 0 | param.infoWindowOptions.height,                   //信息高度
-                offset: {width: 0, height: -20} | param.infoWindowOptions.offset,
-                enableMessage: true  || param.infoWindowOptions.enableMessage        //是否允许信息窗发送短息
+                width: 0 | iOption.width,                    //信息宽度
+                height: 0 | iOption.height,                   //信息高度
+                offset: {width: 0, height: 0} | iOption.offset,
+                enableMessage: true  || iOption.enableMessage        //是否允许信息窗发送短息
             };
-            options.infoWindowOptions.title = typeof title === "string" ? title : title(param.data);
-            var infoWindow = new BMap.InfoWindow( options.infoWindowOptions.title, options.infoWindowOptions);
-            map.openInfoWindow(infoWindow,point);
+            options.infoWindowOptions.content = typeof iOption.content === "string" ? iOption.content : iOption.content(param.data);
+            marker.addEventListener("click",function () {
+                var infoWindow = new BMap.InfoWindow( options.infoWindowOptions.content, iOption.content);
+                map.openInfoWindow(infoWindow,point);
+            });
         }
 
         //点添加到地图中
@@ -881,12 +883,19 @@
 
     var commonOption = {
         map: map,                                        //实例化的一个地图或者是地图容器的id
-        geoCoord: [112.569095, 37.87976],                 //标记点的坐标[经度，纬度]
-        data: {},                                        //传入的数据
+        geoCoord: [112.569095, 37.87976],                //标记点的坐标[经度，纬度]
+        data: {
+            value:21,
+            status:0
+        },                                               //传入的数据
         //覆盖物的样式
         markerOption: {
-            title: "",
-            icon: {}
+            title:  function (param) {                   //信息窗口标题
+                var schema = ["正常", "数据异常", "信号异常"];
+                return "title";
+//                return "一共有台"+ param.value +"机器，状态：" + schema[param.status];
+            },
+            icon: null
         },
 
         //覆盖物标签的样式
@@ -906,11 +915,16 @@
             width: 0,                    //信息宽度
             height: 0,                   //信息高度
             offset: {width: 0, height: -20},
-            title: "信息窗口",            //信息窗口标题
+            title:"信息窗口",
+            content: function (param) {               //信息窗口标题
+                var schema = ["正常", "数据异常", "信号异常"];
+                return "一共有台"+ param.value +"机器，状态：" + schema[param.status];
+            },
             enableMessage: true          //是否允许信息窗发送短息
         }
     };
 
+    addMarker(commonOption)
 </script>
 </body>
 </html>
